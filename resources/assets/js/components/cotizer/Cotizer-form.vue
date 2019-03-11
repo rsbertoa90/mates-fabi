@@ -99,7 +99,7 @@
            
                
                 <button class="button btn-lg btn-outline-success offset-2 mt-2" 
-                        @click.prevent.stop="send">
+                        @click.prevent.stop="confirmSend">
                         Enviar
                 </button>
         </form>
@@ -184,9 +184,37 @@ export default{
                 return false;
             } else {return true;}
         },
-        send(){
+        confirmSend(){
+            var vm = this;
             if (this.formValid()){
+                if (this.formData.shipping){
 
+                    swal({
+                       title: "Importante!",
+                       text: "La eleccion del transporte y el costo de envío corren por cuenta del cliente. Mates fabi no se hace responsable de eventuales daños que pueda ocasionar la empresa de transporte.",
+                       icon: "warning",
+                       buttons: [
+                           'Cancelar',
+                           'Continuar'
+                       ],
+                        confirmButtonColor: '#8CD4F5',
+                        cancelButtonText: 'Cancel',
+                     /*   dangerMode: true, */
+                       }).then(function(isConfirm) {
+                       if (isConfirm) {
+                           vm.send();
+                       } 
+                       });
+                }
+                else {
+                    vm.send();
+                }
+               
+            }
+
+        },
+        send(){
+                
                 var data = this.formData;
                 data.list = JSON.stringify(this.list);
                 data.total = this.total;
@@ -212,9 +240,9 @@ export default{
                         }
                     } 
                 });
-            }
         }
     }
+    
 }
 
 </script>
