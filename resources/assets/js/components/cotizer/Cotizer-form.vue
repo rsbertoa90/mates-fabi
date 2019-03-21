@@ -154,9 +154,9 @@ export default{
     
     methods : {
         validateEmail(email) {
-            console.log(email);
+          
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            console.log(re.test(String(email).toLowerCase()));
+          
             return re.test(String(email).toLowerCase());
         },
         formValid()
@@ -213,10 +213,23 @@ export default{
             }
 
         },
+        compactList(){
+            let res = [];
+            this.list.forEach(item => {
+                let compactItem = {
+                    id : item.id,
+                    units: item.units
+                };
+                res.push(compactItem);
+                
+            });
+            return res;
+        },
         send(){
                 
                 var data = this.formData;
-                data.list = JSON.stringify(this.list);
+                let list = this.compactList();
+                data.list = JSON.stringify(list);
                 data.total = this.total;
                 if (data.shipping){
                     data.shipping = 1;
@@ -229,7 +242,7 @@ export default{
                     data : data,
                     url : '/cotizer/send',
                     success(r){
-                        console.log(r);
+                        
                         if(vm.user.role_id > 2){
                             swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad','success')
                                 .then(confirm => {window.location.replace('/')});

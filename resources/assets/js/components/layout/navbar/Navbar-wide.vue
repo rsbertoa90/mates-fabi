@@ -25,7 +25,7 @@
             </div>
             <div class="col-3 flex-button">
                 <span class="white-bold bg-second p-2 flex-button rounded" style="width:60px">
-                    <span class="fa fa-phone-volume"></span>
+                    <i class="fas fa-phone-volume"></i>
                 </span>  
                 <span class=" p-3 d-big"> 11 3008 5414</span>
             </div>

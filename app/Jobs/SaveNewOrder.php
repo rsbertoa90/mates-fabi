@@ -47,11 +47,21 @@ class SaveNewOrder implements ShouldQueue
         $data = $this->data;
         $list = json_decode($this->list);
 
-         $order = Order::create($data);
+        $order = Order::create($data);
         
+        $listOfIds = array_column($list, 'id');
+        $products = Product::findMany($listOfIds);
 
-        foreach($list as $item)
-        {
+        foreach($products as $p){
+            foreach($list as $i){
+                if ($i->id == $p->id){
+                    $p->units = $i->units;
+                }
+            }
+        }
+        
+        foreach($products as $item)
+        {            
             OrderItem::create([
                 'order_id'=>$order->id,
                 'product_id' => $item->id,

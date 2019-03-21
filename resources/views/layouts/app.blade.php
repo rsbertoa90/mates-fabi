@@ -29,7 +29,7 @@
     {{-- <link href="{{ asset('css/animate.css') }}" rel="stylesheet"> --}}
 
     {{-- PRECONECTS --}}
-    <link rel="preconnect" href="https://use.fontawesome.com">
+   {{--  <link rel="preconnect" href="https://use.fontawesome.com"> --}}
     <link rel="preconnect" href="https://maps.google.com">
     <link rel="preconnect" href="https://www.google.com">
 

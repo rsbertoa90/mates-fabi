@@ -79,7 +79,7 @@
                                         </td>
                                         
                                         <td class="text-info text-center"> 
-                                            $<input style="width:80%" type="number" v-model.lazy="product.price" @change="saveChange(product,'price')"> 
+                                            $<input  style="width:80%" type="number" v-model.lazy="product.price" @change="saveChange(product,'price')"> 
                                             <button class="btn btn-block mt-3" :class="{'bg-focus white-bold':product.offer}" @click="toggleOffer(product)">Oferta</button>
                                         </td>                
                                         <td class="d-flex flex-column justify-content-center align-items-center">
@@ -240,6 +240,11 @@ import { mapActions } from 'vuex';
                 });
             },
             saveChange(product,field){
+                
+                if (field == 'price'){
+                    product.price = product.price.replace(/,/g, '.') ;
+                }
+
                 var data = {
                     product : product.id,
                     field : field,
