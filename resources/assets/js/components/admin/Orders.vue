@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="col-12 row">
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-4 table-container">
                 <table class="table table-striped table-hover"> 
                     <thead>
                         <th>Fecha</th>
@@ -149,4 +149,10 @@ export default {
         cursor: pointer;
     }
    
+   .table-container{
+       height: 85vh;
+       scroll-behavior: auto;
+       overflow-x: hidden;
+       overflow-y: auto;
+   }
 </style>
