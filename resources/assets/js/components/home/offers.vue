@@ -6,7 +6,7 @@
       <!-- swiper -->
       <swiper :options="swiperOption" v-if="render">
         <swiper-slide  v-for="product in notpausedoffers" :key="product.id" 
-                       class="d-flex align-items-stretch">
+                       class="slide">
             <div class="card" itemscope itemtype="https://schema.org/Product">
                 <v-lazy-image v-if="product.images[0]" class="card-img card-img-top" 
                       :src="product.images[0].url"
@@ -116,5 +116,8 @@
   }
   .card-img-overlay{
     max-height: 60%;
+  }
+  .slide{
+    height: 501px;
   }
 </style>
