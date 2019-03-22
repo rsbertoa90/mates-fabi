@@ -134,7 +134,7 @@
             <pedido :list="list"></pedido>
         </div>
         <carousel ref="modal" :product ="carouselProduct" @closeModal="carouselProduct = null"></carousel>
-        <tutorial></tutorial>
+        <tutorial v-if="!user || user.role_id > 2"></tutorial>
     </div>
 </template>
 

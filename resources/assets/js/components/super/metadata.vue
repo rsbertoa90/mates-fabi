@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="row ">
         <div class="col-12">
             <h2>Metadata de paginas</h2>
             <hr>

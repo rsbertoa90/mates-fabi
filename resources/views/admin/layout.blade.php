@@ -33,7 +33,7 @@ if(!isset($user)){
 <body>
     <div class="d-flex justify-content-center align-items-center" style="width:100vw">
         <div id="app" class="container">
-            @include('admin.nav')
+            <admin-nav></admin-nav>
             <div class="row">
                 <div class="col-12">
                     @yield('content')
