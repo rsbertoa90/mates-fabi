@@ -6,8 +6,8 @@
       <!-- swiper -->
       <swiper :options="swiperOption" v-if="render">
         <swiper-slide  v-for="product in notpausedoffers" :key="product.id" 
-                       class="slide">
-            <div class="card" itemscope itemtype="https://schema.org/Product">
+                       class="">
+            <div class="card slide" itemscope itemtype="https://schema.org/Product">
                 <v-lazy-image v-if="product.images[0]" class="card-img card-img-top" 
                       :src="product.images[0].url"
                       :title="product.name"
