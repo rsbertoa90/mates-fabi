@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Metadata;
+use Illuminate\Support\Facades\Cache;
 class ProductController extends Controller
 {
+
+     public function forgetCaches(){
+        Cache::forget('productsNotPaused');
+        Cache::forget('categories');
+    }
+
+
 
     public function searchResults(Request $request)
     {
@@ -50,6 +58,7 @@ class ProductController extends Controller
      */
     public function create(Request $request)
     {
+        $this-forgetCaches();
         return Product::create($request->only(['price',
                                                 'category_id',
                                                 'name',
@@ -61,16 +70,10 @@ class ProductController extends Controller
 
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
-      
+        $this->forgetCaches();
+
         $field = $request->field;
         $product = Product::find($request->product);
         $product->$field = $request->value;
@@ -86,6 +89,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $this->forgetCaches();
         Product::destroy($id);
         return;
     }

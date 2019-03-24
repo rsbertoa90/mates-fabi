@@ -14,7 +14,7 @@ use Mail;
 use App\Config;
 use App\Jobs\SaveNewOrder;
 use Queue;
-
+use Illuminate\Support\Facades\Cache;
 class OrderController extends Controller
 {
     //
@@ -40,6 +40,7 @@ class OrderController extends Controller
 
     public function create(Request $request)
     {
+        Cache::forget('orders');
         /* {"message":"asdasd",
             "phone":"asd",
             "email":"asd@asd.com",
@@ -69,6 +70,7 @@ class OrderController extends Controller
 
     public function edit(Request $request)
     {
+        Cache::forget('orders');
         $order = Order::find($request->order);
         $field = $request->field;
         $order->$field = $request->value;
@@ -81,12 +83,23 @@ class OrderController extends Controller
     {
         
         if (Auth::check()){
+
             $user = Auth::user();
-            $orders = Order::where('user_id',$user->id)
+            if($user->email == "pedidosonline@matesfabi.com")
+            {
+                return Cache::rememberForever('orders',function() use ($user){
+                    return Order::where('user_id',$user->id)
                         ->with('orderItems.product')
                         ->get();
-        
-           return $orders;             
+                });
+            }
+            else {
+                return Order::where('user_id',$user->id)
+                            ->with('orderItems.product')
+                            ->get();
+            
+            }
+                             
                         
         }
     }

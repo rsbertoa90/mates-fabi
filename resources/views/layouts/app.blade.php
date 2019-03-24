@@ -48,7 +48,7 @@
     </script>
 
     <!-- Facebook Pixel Code -->
-        <script>
+      {{--   <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -64,7 +64,7 @@
         src="https://www.facebook.com/tr?id=804920179714584&ev=PageView&noscript=1
         https://www.facebook.com/tr?id=804920179714584&ev=PageView&noscript=1
         "
-        /></noscript>
+        /></noscript> --}}
         <!-- End Facebook Pixel Code -->
 
 

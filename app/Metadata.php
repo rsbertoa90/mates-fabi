@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Cache;
 class Metadata extends Model
 {
  protected $guarded=[];
@@ -11,7 +11,10 @@ class Metadata extends Model
 
  public static function findOrCreate($page)
  {
-    $meta = Self::where('page',$page)->get()->first();
+    $cacheCode = 'meta-'.$page;
+    $meta = Cache::rememberForever($cacheCode, function() use ($page){
+        Self::where('page',$page)->get()->first();
+    });
 
     if(!$meta)
     {
@@ -23,6 +26,11 @@ class Metadata extends Model
 
  public static function getPage($page)
  {
-      return Self::where('page',$page)->get()->first();
+     
+     $cacheCode = 'meta-'.$page;
+     return Cache::rememberForever($cacheCode, function() use ($page){
+        Self::where('page',$page)->get()->first();
+    });
+
  }
 }

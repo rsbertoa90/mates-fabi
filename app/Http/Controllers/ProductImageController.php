@@ -4,19 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ProductImage;
-
+use Illuminate\Support\Facades\Cache;
 
 class ProductImageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+  
+    public function forgetCaches(){
+        Cache::forget('productsNotPaused');
+        Cache::forget('categories');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -25,6 +22,7 @@ class ProductImageController extends Controller
      */
     public function create(Request $request)
     {
+        $this->forgetCaches();
         $image = $request->file('image');
         $path = $image->storePublicly('/images/products');
         $path = '/storage/'.$path;
@@ -38,42 +36,12 @@ class ProductImageController extends Controller
 
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+   
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
    public function update(Request $request)
     {
-      
+      $this->forgetCaches();
         $field = $request->field;
         $image = ProductImage::find($request->id);
         $image->$field = $request->value;
@@ -92,6 +60,7 @@ class ProductImageController extends Controller
      */
     public function destroy($id)
     {
+        $this->forgetCaches();
         ProductImage::destroy($id);
     }
 }

@@ -19,9 +19,11 @@
                 <hr>
                 <div class="row w-100">
                     <div class="col-12 col-lg-8">
-                        <admin-create :categories="categories" @productSaved="refresh"></admin-create>
+                        <button class="btn btn-outline-info" @click="showCreate = !showCreate">Crear Producto</button>
+                        
+                        <admin-create v-if="showCreate" :categories="categories" @productSaved="refresh"></admin-create>
                     </div>
-                    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                   <!--  <div class="col-4 d-flex flex-column justify-content-center align-items-center">
                         <h4>Cambiar precios masivo</h4>
                         <h5 v-if="selectedProducts"> {{selectedProducts.length}} Productos seleccionados </h5>
                         <button @click="selectAllProducts" class="btn btn-sm btn-outline-danger mb-2">Seleccionar todos</button>
@@ -32,24 +34,31 @@
                         
                         </div>
                             <button class="btn btn-md btn-outline-success mt-1" v-if="variation != 0 && selectedProducts.length > 0" @click="applyVariation">Aplicar</button>
-                    </div>
+                    </div> -->
+                </div>
+                <div class="row mt-4 d-flex align-items-start ">
+                    <label class="col-6 col-lg-2 label mt-1" > <h4> MOSTRAR </h4></label>
+                    <select v-if="categories && categories.length > 0" type="text" class="form-control col-6 col-lg-2" v-model="selectedCategory">
+                       
+                        <option v-for="category in categories" :key="category.name" :value="category">
+                            {{category.name}}
+                        </option>
+                    </select>
                 </div>
                 <hr>
-                <div >
-                    <div v-for="category in categories" :key="category.id" class="card flex-wrap">
-                        <div class="card-header" :id="category.id">
+                <div v-if="selectedCategory">
+                    <div   class="card flex-wrap">
+                        <div class="card-header">
                             <div class="d-flex align-items-center justify-content-start">
                                 
-                                    <input type="checkbox" class=" form-control" 
-                                            v-model="category.selected" @change="categoryChekbox(category)">
+                                   
                                     <h5 class="mb-0 ">
-                                        {{category.name.ucfirst()}}
+                                        {{selectedCategory.name.ucfirst()}}
                                     </h5>
                             
                             </div>
                         </div>
-                        <div :id="'category-'+category.id" class="" 
-                              aria-labelledby="headingOne" >
+                        <div>
                             <div class="card-body">
                             <table class="table table-striped table-bordered ">
                                 <thead class="">
@@ -61,7 +70,7 @@
                                 <transition-group tag="tbody" 
                                                     enter-active-class="animated slideInLeft faster "
                                                     leave-active-class="animated fadeOutDown faster position-absolute ">
-                                    <tr v-for="product in category.products" :key="product.id">
+                                    <tr v-for="product in selectedCategory.products" :key="product.id">
                                         <td >
                                             <img v-if="product.images.length > 0" 
                                                   :src="product.images[0].url" 
@@ -117,6 +126,8 @@ import { mapActions } from 'vuex';
         },
           data(){
             return {
+                selectedCategory:null,
+                showCreate:false,
                 variation : 0,
                 categories : [],
                 list : [],
@@ -147,7 +158,8 @@ import { mapActions } from 'vuex';
                         return list;
                     }
                 }
-            }
+            },
+            
         },
       
         methods : {
@@ -229,7 +241,7 @@ import { mapActions } from 'vuex';
                         
                     });
             },
-            logme(e){console.log(e)},
+           
             refresh(){
                 var vm = this;
                
@@ -237,6 +249,9 @@ import { mapActions } from 'vuex';
                 .then(response =>{
                    
                     vm.categories = _.sortBy(response.data,'name');
+                    if (!vm.selectedCategory){
+                        vm.selectedCategory = vm.categories[0];
+                    }
                 });
             },
             saveChange(product,field){
@@ -267,20 +282,7 @@ import { mapActions } from 'vuex';
                 
                 $(element).modal('show')
             },
-            categoryChekbox(category)
-            {
-                 if (category.selected == undefined){
-                        Vue.set(category,'selected',true);
-                    }
-                category.products.forEach(product => {     
-                    if (product.selected == undefined)
-                    {
-                        Vue.set(product,'selected',true);
-                    }
-                   product.selected = category.selected;
-           
-                });
-            },
+            
             selectAllProducts()
             {
                 this.categories.forEach(cat => {

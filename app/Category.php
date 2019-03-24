@@ -4,11 +4,28 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Product;
+use Illuminate\Support\Facades\Cache;
 
 class Category extends Model
 {
     //
     protected $guarded =[];
+
+      public static function notPaused()
+    {
+       return Cache::rememberForever('productsNotPaused', function () {
+            return Category::with('products.images')
+                    ->with(['products' => function($q){
+                        $q->where('paused',0);
+                    }])
+                    ->whereHas('products' , function($q){
+                $q->where('paused',0)->orderBy('name');
+            })->orderby('name')->get();
+        });
+        
+    }
+
+
 
     public function products(){
         return $this->hasMany(Product::class)->orderBy('name');
