@@ -21,7 +21,7 @@
             </a>
         </div>
 
-        <home-maps></home-maps>
+       <!--  <home-maps></home-maps> -->
 
         <div>
             <p class="text-center">
