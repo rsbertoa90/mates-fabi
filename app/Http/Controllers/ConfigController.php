@@ -10,7 +10,7 @@ class ConfigController extends Controller
 {
     public function get()
     {
-        Cache::rememberForever('config',function(){
+        return Cache::rememberForever('config',function(){
             return Config::find(1);
         });
     }
