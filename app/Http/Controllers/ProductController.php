@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Metadata;
 use Illuminate\Support\Facades\Cache;
+
 class ProductController extends Controller
 {
 
@@ -58,7 +59,8 @@ class ProductController extends Controller
      */
     public function create(Request $request)
     {
-        $this-forgetCaches();
+        $this->forgetCaches();
+        
         return Product::create($request->only(['price',
                                                 'category_id',
                                                 'name',
