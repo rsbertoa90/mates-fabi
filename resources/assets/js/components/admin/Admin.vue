@@ -108,7 +108,9 @@
                         </div>
                     </div>
                 </div>
-                <image-modal :product="product" @closedModal="product = null"  ref="modal" @refresh="refresh()"></image-modal>
+                <image-modal :product="product" @closedModal="product = null"  
+                            ref="modal" @refresh="refresh()" v-if="showModal">
+                </image-modal>
         </div>
 
         
@@ -133,6 +135,15 @@ import { mapActions } from 'vuex';
                 list : [],
                 product : null,
                 showModal : false,
+            }
+        },
+        watch:{
+            showModal(){
+                if (!this.showModal)
+                {
+                    console.log(this.$refs.modal);
+            
+                }
             }
         },
         computed : {
@@ -243,14 +254,22 @@ import { mapActions } from 'vuex';
             },
            
             refresh(){
+                
                 var vm = this;
                
+               
+
                 vm.$http.get('/api/categories')
                 .then(response =>{
                    
                     vm.categories = _.sortBy(response.data,'name');
                     if (!vm.selectedCategory){
                         vm.selectedCategory = vm.categories[0];
+                    } else {
+                        let selected = vm.categories.find(cat => {
+                            return cat.id = vm.selectedCategory.id;
+                        });
+                        vm.selectedCategory = selected;
                     }
                 });
             },
@@ -278,9 +297,13 @@ import { mapActions } from 'vuex';
             imgModal(product){
                 this.product = product;
                 this.showModal = true;
-                let element = this.$refs.modal.$el
-                
-                $(element).modal('show')
+
+                setTimeout(() => {
+                    let element = this.$refs.modal.$el
+                    
+                    $(element).modal('show')
+                }, 100);
+
             },
             
             selectAllProducts()

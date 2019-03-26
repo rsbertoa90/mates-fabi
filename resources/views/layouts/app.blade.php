@@ -43,7 +43,10 @@
     {{-- PRECONECTS --}}
    {{--  <link rel="preconnect" href="https://use.fontawesome.com"> --}}
     <link rel="preconnect" href="https://maps.google.com">
-    <link rel="preconnect" href="https://www.google.com">
+    <link rel="ppreconnect" href="https://www.google.com">
+    <link rel="ppreconnect" href="https://www.google-analytics.com">
+    <link rel="ppreconnect" href="https://fonts.gstatic.com">
+    <link rel="ppreconnect" href="https://ajax.googleapis.com">
 
     {{-- Google search panel --}}
     <meta name="google-site-verification" content="NYmY4PL-kI89JjTkAUhCTkR8oWiGfabLWvgngOyFnf8" />
