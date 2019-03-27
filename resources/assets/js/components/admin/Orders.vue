@@ -131,8 +131,17 @@ export default {
             {
                 res = res.filter(order => {
                     let searchTerm = vm.searchTerm.trim().toLowerCase();
-                    let client = order.client.trim().toLowerCase();
-                    let  email = order.email.trim().toLowerCase();
+                    
+                    let client = '';
+                    if (order.client){
+                         client = order.client.trim().toLowerCase();
+                    }
+                    
+                    let email='';
+                    if(order.email){
+                          email = order.email.trim().toLowerCase();
+                    }
+                    
                     return (client.indexOf(searchTerm) > -1
                             || email.indexOf(searchTerm) > -1);
                 });
