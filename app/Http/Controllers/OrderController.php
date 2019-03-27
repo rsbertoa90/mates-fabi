@@ -40,7 +40,7 @@ class OrderController extends Controller
 
     public function create(Request $request)
     {
-        Cache::forget('orders');
+       
         /* {"message":"asdasd",
             "phone":"asd",
             "email":"asd@asd.com",
@@ -63,6 +63,8 @@ class OrderController extends Controller
         $data['user_id'] = $user->id;
         
         Queue::push(new SaveNewOrder($data,$list));
+
+        Cache::forget('orders');
 
         return;
         
