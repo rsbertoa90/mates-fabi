@@ -28,9 +28,9 @@ class Metadata extends Model
  {
      
      $cacheCode = 'meta-'.$page;
-     return Cache::rememberForever($cacheCode, function() use ($page){
+     return /* Cache::rememberForever($cacheCode, function() use ($page){ */
         Self::where('page',$page)->get()->first();
-    });
+    /* }); */
 
  }
 }
