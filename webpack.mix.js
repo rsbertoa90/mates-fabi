@@ -12,5 +12,6 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
+    .extract(['vue', 'bootstrap', 'vue-mq', 'sweetalert', 'vuex', 'vue-awesome-swiper', 'v-lazy-image'])
    .sass('resources/assets/sass/app.scss', 'public/css')
    .version();

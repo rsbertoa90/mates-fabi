@@ -29,8 +29,10 @@
         })();
     </script>
     <!-- Scripts -->
+      <!-- Scripts -->
+    <script src="{{ mix('js/manifest.js') }}" defer></script>
+    <script src="{{ mix('js/vendor.js') }}" defer></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link defer rel="dns-prefetch" href="https://fonts.gstatic.com">
 

@@ -19,7 +19,7 @@
                   </div>
                 <div class="card-body">
                     <h5 class="card-title" itemprop="name"> {{product.name | ucFirst}}  </h5>
-                    <h4 v-if="!$store.getters.getConfig.hide_prices" class="second">  
+                    <h4 v-if="config && !config.hide_prices" class="second">  
                       ${{product.price | price}} 
                       <strike style="font-size:1rem" v-if="product.offer && $store && !$store.getters.getConfig.hide_prices" class="text-secondary"> ${{product.price * 1.67 | price}}</strike> 
                     </h4>
@@ -67,6 +67,9 @@
         this.render=true;
     },
     computed:{
+      config(){
+        return this.$store.getters.getConfig;
+      },
       offers(){
         
         return this.$store.getters['categories/getOffers'];

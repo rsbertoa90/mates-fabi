@@ -22,8 +22,8 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('con
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import BootstrapVue from 'bootstrap-vue'
-Vue.use(BootstrapVue);
+/* import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue); */
 
 import VueMq from 'vue-mq'
 
