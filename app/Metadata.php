@@ -12,9 +12,9 @@ class Metadata extends Model
  public static function findOrCreate($page)
  {
     $cacheCode = 'meta-'.$page;
-    $meta = Cache::rememberForever($cacheCode, function() use ($page){
+    $meta = /* Cache::rememberForever($cacheCode, function() use ($page){ */
         Self::where('page',$page)->get()->first();
-    });
+   /*  }); */
 
     if(!$meta)
     {
