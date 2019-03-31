@@ -31,14 +31,9 @@ Vue.component('fade-loader', require('vue-spinner/src/FadeLoader.vue'));
 Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue'));
 Vue.component('cotizer-form', require('./components/cotizer/Cotizer-form.vue'));
 // Vue.component('csrf', require('./components/csrf.vue'));
-Vue.component('app-admin', require('./components/admin/Admin.vue'));
-Vue.component('admin-nav', require('./components/admin/Admin-nav.vue'));
-Vue.component('admin-failed-jobs', require('./components/failedJobs/FailedJobs.vue'));
 Vue.component('app-navbar', require('./components/layout/Navbar.vue'));
 Vue.component('app-footer', require('./components/layout/footer/Footer.vue'));
 Vue.component('app-whatsapp', require('./components/layout/Whatsapp-float.vue'));
-Vue.component('app-admin', require('./components/admin/Admin.vue'));
-Vue.component('app-super', require('./components/super/Super.vue'));
 Vue.component('image-logo', require('./components/layout/images/image-logo.vue'));
 Vue.component('app-side-menu', require('./components/layout/Side-menu.vue'));
 
@@ -51,7 +46,15 @@ Vue.component('app-product', require('./components/product/Product.vue'));
 Vue.component('app-regalos', require('./components/regalos/Regalos.vue'));
 Vue.component('app-franquicia', require('./components/franquicia/Franquicia.vue'));
 Vue.component('app-search-results', require('./components/search/Results.vue'));
-Vue.component('admin-orders',require('./components/admin/Orders.vue'))
+
+Vue.component('app-admin', ()=>import('./components/admin/Admin.vue'));
+Vue.component('app-super', ()=>import('./components/super/Super.vue'));
+Vue.component('admin-orders',()=>import('./components/admin/Orders.vue'))
+Vue.component('app-admin', ()=>import('./components/admin/Admin.vue'));
+Vue.component('admin-nav', ()=>import('./components/admin/Admin-nav.vue'));
+Vue.component('admin-failed-jobs', ()=>import('./components/failedJobs/FailedJobs.vue'));
+
+
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 import swal from 'sweetalert';

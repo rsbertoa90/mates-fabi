@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Metadata;
-use Illuminate\Support\Facades\Cache;
+
 
 
 class MetadataController extends Controller
@@ -14,16 +14,16 @@ class MetadataController extends Controller
     public function update(Request $request)
     {
         $meta = Metadata::findOrCreate($request->page);
-        $cacheCode = 'meta-'.$meta;
-        Cache::forget($cacheCode);
+       
         
         $field = $request->field;
-
+        
         $meta->$field = $request->value;
-
+        
         $meta->save();
-
+        
         return;
+        
     }
 
 
