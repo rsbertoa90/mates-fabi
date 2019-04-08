@@ -131,7 +131,7 @@ import { mapActions } from 'vuex';
                 selectedCategory:null,
                 showCreate:false,
                 variation : 0,
-                categories : [],
+              
                 list : [],
                 product : null,
                 showModal : false,
@@ -147,6 +147,9 @@ import { mapActions } from 'vuex';
             }
         },
         computed : {
+            categories(){
+                return this.$store.getters['categories/getCategories'];
+            },
             config(){
                 return this.$store.getters.getConfig;
             },
@@ -256,22 +259,15 @@ import { mapActions } from 'vuex';
             refresh(){
                 
                 var vm = this;
-               
-               
-
-                vm.$http.get('/api/categories')
-                .then(response =>{
-                   
-                    vm.categories = _.sortBy(response.data,'name');
-                    if (!vm.selectedCategory){
-                        vm.selectedCategory = vm.categories[0];
-                    } else {
-                        let selected = vm.categories.find(cat => {
-                            return cat.id = vm.selectedCategory.id;
-                        });
-                        vm.selectedCategory = selected;
-                    }
-                });
+                this.$store.dispatch('categories/fetch');
+                if (vm.selectedCategory){
+                    setTimeout(() => {
+                        vm.selectedCategory = vm.categories.find(c => {
+                            return c.id == vm.selectedCategory.id;
+                        })
+                    }, 100);
+                }
+             
             },
             saveChange(product,field){
                 

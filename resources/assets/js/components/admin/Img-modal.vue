@@ -53,7 +53,7 @@
        
              </div>
             <div class="modal-footer">
-                <button v-if="imageUploaded" type="button" class="btn btn-primary" @click="save">Guardar</button>
+                <button v-if="imageUploaded" type="button" class="btn btn-primary" @click.prevent="save">Guardar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
          </div>
@@ -155,7 +155,7 @@
                         files : true,
                         success: function () {
                           
-                            vm.$emit('refresh');
+                           vm.$emit('refresh');
                            vm.closedModal();
                            vm.i=0;
                         },

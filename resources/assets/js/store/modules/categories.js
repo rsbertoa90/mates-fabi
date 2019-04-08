@@ -109,7 +109,8 @@ const actions = {
         
         Vue.http.get('/api/categories')
             .then(response => {
-                commit('update',response.data);
+                let cats = _.sortBy(response.data, 'name');
+                commit('update',cats);
             });
     },
 
