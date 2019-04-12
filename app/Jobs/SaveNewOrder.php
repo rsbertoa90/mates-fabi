@@ -72,7 +72,7 @@ class SaveNewOrder implements ShouldQueue
             ]);
         }
 
-       if($order->mail){
+       if($order->email){
            MailController::mailOrderToClient($order);
         }
         
