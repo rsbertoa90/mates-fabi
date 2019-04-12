@@ -44,11 +44,7 @@
                    <label class="col-4 col-lg-4" for="">Nombre y Apellido <span v-if="user.role_id < 3"> (cliente) </span> </label>
                    <input required type="text" v-model="formData.client"  class="form-control col-8 col-lg-4">
                 </div> 
-                 <div v-if="user.role_id < 3" class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-4" for="">Nombre del vendedor</label>
-                   <input required type="text" v-model="formData.seller"  class="form-control col-8 col-lg-4">
-                </div> 
-               
+                 
                 <!-- DATOS DE ENVIO -->
                 <div v-if="formData.shipping">
                     
@@ -87,9 +83,24 @@
                    <label class="col-4 col-lg-4" for="">Email</label>
                    <input :required="user.role_id > 2" type="email" v-model="formData.email"  class="form-control col-8 col-lg-4">
                 </div> 
-               <div class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-4" for="">Telefono</label>
-                   <input v-model="formData.phone" type="text" class="form-control col-8 col-lg-4">
+               <div class="col-12 row form-group-row mt-2 mb-2">
+                   <label class="col-4 col-lg-4 mt-4" for="">Telefono</label>
+                   <div class="col-6 row">
+                       <div class="col-4 d-flex flex-column">
+                           <label >Codigo de area</label>
+                            <input v-model="phone.code" type="text" class="form-control">
+                       </div>
+                       <div class="col-4 d-flex flex-column">
+                           <label>Numero de telefono</label>
+                           <input v-model="phone.number" type="text" class="form-control">
+                       </div>
+                       <div class="col-12 row mt-1">
+                           <input type="checkbox" style="height:20px" v-model="phone.whatsapp" class="col-2 form-control">
+                           <label class="col-7"> Contactarme por Whatsapp <i class="fab fa-whatsapp"></i>  </label>
+                       </div>
+
+                   </div>
+                   
                 </div> 
                <div class="col-12 row form-group-row">
                    <label class="col-4 col-lg-4" for="">Mensaje</label>
@@ -116,6 +127,11 @@ export default{
     data(){return{
         state:null,
         loading:false,
+        phone : {
+            code: '',
+            number: '',
+            whatsapp: false
+        },
         formData : {
             shipping:false,
             cp:'',
@@ -161,7 +177,7 @@ export default{
         },
         formValid()
         {
-            if (this.formData.phone.length < 6){
+            if (this.phone.code.length < 2 || this.phone.number.length < 4 ){
                  swal('Hay algo mal con el telefono','','error');
                  return false; 
             }
@@ -186,6 +202,12 @@ export default{
         },
         confirmSend(){
             var vm = this;
+
+            /* Convierto el campo  telefono en un string para formdata */
+            let wha = this.phone.whatsapp ? 'Whatsapp' : 'Llamar por telefono'
+            this.formData.phone = this.phone.code + ' - ' + this.phone.number + ' - ' +wha;
+            
+
             if (this.formValid()){
                 if (this.formData.shipping){
 
