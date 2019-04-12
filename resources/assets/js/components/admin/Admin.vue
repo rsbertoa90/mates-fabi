@@ -38,28 +38,22 @@
                 </div>
                 <div class="row mt-4 d-flex align-items-start ">
                     <label class="col-6 col-lg-2 label mt-1" > <h4> MOSTRAR </h4></label>
-                    <select v-if="categories && categories.length > 0" type="text" class="form-control col-6 col-lg-2" v-model="selectedCategory">
+                    <select @change="searchTerm=''" v-if="categories && categories.length > 0" type="text" class="form-control col-6 col-lg-2" v-model="selectedCategory">
                        
                         <option v-for="category in categories" :key="category.name" :value="category">
                             {{category.name}}
                         </option>
                     </select>
+                    <input @change="selectedCategory=null" v-model.lazy="searchTerm" type="text" class="form-control col-10 col-lg-4 offset-lg-2" placeholder="BUSCAR">
+                    <button class="btn btn-outline-info col-1"> <i class="fas fa-search"></i> </button>
                 </div>
+
                 <hr>
-                <div v-if="selectedCategory">
+                <div v-if="products">
                     <div   class="card flex-wrap">
-                        <div class="card-header">
-                            <div class="d-flex align-items-center justify-content-start">
-                                
-                                   
-                                    <h5 class="mb-0 ">
-                                        {{selectedCategory.name.ucfirst()}}
-                                    </h5>
-                            
-                            </div>
-                        </div>
-                        <div>
-                            <div class="card-body">
+                       
+                       
+                        <div class="card-body">
                             <table class="table table-striped table-bordered ">
                                 <thead class="">
                                     <th >imagen</th>
@@ -67,50 +61,17 @@
                                     <th>Producto</th>
                                     <th>Precio</th>
                                 </thead>
-                                <transition-group tag="tbody" 
-                                                    enter-active-class="animated slideInLeft faster "
-                                                    leave-active-class="animated fadeOutDown faster position-absolute ">
-                                    <tr v-for="product in selectedCategory.products" :key="product.id">
-                                        <td >
-                                            <img v-if="product.images.length > 0" 
-                                                  :src="product.images[0].url" 
-                                                  :alt="product.name" 
-                                                  @click="imgModal(product)">  
-                                            <img v-else src="/storage/images/app/no-image.png" 
-                                                alt="no-image" @click="imgModal(product)"> 
-                                        </td>
-                                        <td>  
-                                            <input v-model.lazy="product.code" @change="saveChange(product,'code')" type="text" class="nametd"> 
-                                        </td>
-                                        <td>  
-                                            <textarea rows="2" placeholder="Nombre" v-model.lazy="product.name" @change="saveChange(product,'name')" type="text"> </textarea> 
-                                            <textarea placeholder="Descripcion" v-model="product.description" @change="saveChange(product,'description')" rows="3"></textarea>
-                                        </td>
-                                        
-                                        <td class="text-info text-center"> 
-                                            $<input  style="width:80%" type="number" v-model.lazy="product.price" @change="saveChange(product,'price')"> 
-                                            <button class="btn btn-block mt-3" :class="{'bg-focus white-bold':product.offer}" @click="toggleOffer(product)">Oferta</button>
-                                        </td>                
-                                        <td class="d-flex flex-column justify-content-center align-items-center">
-                                            <input type="checkbox" class="form-control" v-model="product.selected">
-                                            <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                            <button @click.prevent="togglePause(product)" class="btn btn-sm m-1" :class="{'btn-info' : !product.paused, 'btn-success': product.paused}">
-                                                <i :class="{'fa fa-pause-circle' : !product.paused , 'fa fa-play' : product.paused}"></i>
-                                            </button>
-                                            
-                                        </td>
+                                    
+                                    <tr is="productRow" @refresh="refresh" :product="product" v-for="product in products" :key="product.name">
+
                                     </tr>
-                                </transition-group>
+                            
                             </table>
-                            </div>
                         </div>
+                     
                     </div>
                 </div>
-                <image-modal :product="product" @closedModal="product = null"  
-                            ref="modal" @refresh="refresh()" v-if="showModal">
-                </image-modal>
+                
         </div>
 
         
@@ -118,16 +79,19 @@
 </template>
 
 <script>
-import imageModal from './Img-modal.vue';
+
 import adminCreate from './Create.vue';
+import productRow from './product-row.vue';
 import { mapActions } from 'vuex';
     export default {
         components : {
-            imageModal : imageModal,
-            adminCreate : adminCreate
+          
+            adminCreate : adminCreate,
+            productRow
         },
           data(){
             return {
+                searchTerm:'',
                 selectedCategory:null,
                 showCreate:false,
                 variation : 0,
@@ -153,26 +117,17 @@ import { mapActions } from 'vuex';
             config(){
                 return this.$store.getters.getConfig;
             },
-            selectedProducts()
+            products()
             {
-                if(this.categories){
-                    
-                    
-                    if (this.categories[1]){
-
-                        var list =[];
-                        this.categories.forEach(cat => {
-                            cat.products.forEach(prod => {
-                                if (prod.selected)
-                                {
-                                    list.push(prod);
-                                }
-                            });
-                        });
-                        return list;
-                    }
+                if (this.selectedCategory)
+                {
+                    return this.selectedCategory.products;
                 }
-            },
+                else if(this.searchTerm && this.searchTerm.trim().length > 1) {
+                    return this.searchFilter();
+                }
+            }
+           
             
         },
       
@@ -181,6 +136,44 @@ import { mapActions } from 'vuex';
             fetchUser : 'fetchUser',
             fetchConfig : 'fetchConfig',
             }),
+            searchComparision(term,prod){
+                  let prodName = prod.name.toLowerCase().trim();
+                  term = term.toLowerCase().trim();
+                  let categoryName = prod.category.name.toLowerCase().trim();
+                  
+                  let code = prod.code.toLowerCase().trim();
+
+                  if (
+                      prodName.indexOf(term) > -1
+                      || categoryName.indexOf(term) > -1
+                      || code.indexOf(term) > -1
+                  ){return true;}
+                  else{return false;}
+            },
+            searchFilter(){
+                this.loading=true;
+                let terms = this.searchTerm.split(' ');
+                let res = [];
+                this.categories.forEach(c => {
+                    c.products.forEach(prod => {
+                        let include = true;
+                        terms.forEach(term => {
+                            if (include && !this.searchComparision(term,prod))
+                            {
+                                include = false;
+                            }
+                        });
+                        if (include){
+                            res.push(prod);
+                        }
+                    });
+                });
+                this.loading=false;
+                return res;
+
+                
+                
+            },
             toggleHidePrices(){
                 if (this.config.hide_prices)
                 {
@@ -195,66 +188,7 @@ import { mapActions } from 'vuex';
                     
                     });
             },
-            toggleOffer(product){
-                product.offer = ! product.offer;
-                var data = {
-                    product : product.id,
-                    field : 'offer',
-                    value : product.offer ? 1 : 0
-                }
-                $.ajax({
-                    method : 'put',
-                    data : data,
-                    url : '/admin/product'
-                });
-            },
-            togglePause(product){
-                var vm = this;
-                product.paused = !product.paused;
-                vm.saveChange(product,'paused');
-                for (const key in vm.categories) {
-                    if (vm.categories.hasOwnProperty(key)) {
-                        const category = vm.categories[key];
-                        for (const k in category.products) {
-                            if (category.products.hasOwnProperty(k)) {
-                                const prod = category.products[k];
-                                if (prod.id == product.id )
-                                {
-                                    vm.categories[key].products[k].paused = product.paused;
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                
-            },
-            deleteProduct(product){
-                var vm = this;
-                this.$http.delete('/admin/product/'+product.id)
-                    .then(response => {
-                        // console.log(response);
-                        for (const key in vm.categories) {
-                            if (vm.categories.hasOwnProperty(key)) {
-                                const cat = vm.categories[key];
-                                for (const k in cat.products) {
-                                    if (cat.products.hasOwnProperty(k)) {
-                                        const prod = cat.products[k];
-                                        if(prod.id == product.id)
-                                        {
-                                            vm.categories[key].products.splice(k,1);
-                                            if (vm.categories[key].products.length == 0){
-                                                vm.categories.splice(key,1);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        
-                    });
-            },
+            
            
             refresh(){
                 
@@ -269,72 +203,10 @@ import { mapActions } from 'vuex';
                 }
              
             },
-            saveChange(product,field){
-                
-                if (field == 'price'){
-                    product.price = product.price.replace(/,/g, '.') ;
-                }
-
-                var data = {
-                    product : product.id,
-                    field : field,
-                    value : product[field]
-                }
-                if (data.field == 'paused')
-                {
-                    data.value = data.value ? 1 : 0;
-                }
-                $.ajax({
-                    method : 'put',
-                    data : data,
-                    url : '/admin/product'
-                });
-            },
-            imgModal(product){
-                this.product = product;
-                this.showModal = true;
-
-                setTimeout(() => {
-                    let element = this.$refs.modal.$el
-                    
-                    $(element).modal('show')
-                }, 100);
-
-            },
             
-            selectAllProducts()
-            {
-                this.categories.forEach(cat => {
-                    if(cat.selected == undefined)
-                    {
-                      Vue.set(cat,'selected',true)
-                    }
-                    else {
-                        cat.selected = true;
-                    }
-
-                    cat.products.forEach(prod => {
-                        if (prod.selected == undefined)
-                        {
-                            Vue.set(prod,'selected',true)
-                        }
-                        else {
-                            prod.selected = true;
-                        }
-                    });
-                });
-            },
-            applyVariation()
-            {
-                var vm =this;
-                var variation = 1+(this.variation/100);
-                this.selectedProducts.forEach(prod => {
-                    prod.price = prod.price * variation;
-                    vm.saveChange(prod,'price');
-                });
-                vm.refresh();
-                vm.variation = 0;
-            }
+            
+            
+           
         },
         created(){
             this.refresh();
