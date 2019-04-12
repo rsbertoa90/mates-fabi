@@ -167,7 +167,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     input[type="checkbox"]{
         height: 20px;
         width: 20px;
@@ -178,8 +178,14 @@ export default {
    
    .table-container{
        height: 85vh;
+       max-width: 350px;
+       white-space: normal;
+       word-wrap: break-word;
        scroll-behavior: auto;
        overflow-x: hidden;
        overflow-y: auto;
+       td,th{
+           max-width: 130px;
+       }
    }
 </style>
