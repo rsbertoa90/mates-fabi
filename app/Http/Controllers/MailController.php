@@ -80,7 +80,7 @@ class MailController extends Controller
 
      private static function mailAdmin($email){
         Mail::to('matesfabi@gmail.com')
-    ->cc('roominagii@gmail.com')
+    ->bcc('roominagii@gmail.com')
     ->send($email);
     }
 
@@ -89,6 +89,6 @@ class MailController extends Controller
     {
         Mail::to($order->email)
             ->send(new Cotizacion($order))
-            ->bcc("matesfabi@gmail.com,roominagii@gmail.com");
+            ->bcc("matesfabi@gmail.com");
     }
 }
