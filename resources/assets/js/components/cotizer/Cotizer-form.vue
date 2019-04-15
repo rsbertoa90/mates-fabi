@@ -40,58 +40,58 @@
 
              
              
-               <div class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-4" for="">Nombre y Apellido <span v-if="user.role_id < 3"> (cliente) </span> </label>
-                   <input required type="text" v-model="formData.client"  class="form-control col-8 col-lg-4">
+               <div class="col-12 row form-group-row ">
+                   <label class="col-12 col-lg-4 font-weight-bold" for="">Nombre y Apellido <span v-if="user.role_id < 3"> (cliente) </span> </label>
+                   <input required type="text" v-model="formData.client"  class="form-control col-12 col-lg-4">
                 </div> 
                  
                 <!-- DATOS DE ENVIO -->
                 <div v-if="formData.shipping">
                     
                     <div class="col-12 row form-group-row">
-                        <label class="col-4 col-lg-4" for=""> Provincia </label>
-                        <select v-if="states.length > 0" v-model="state" class="form-control col-8 col-lg-4">
+                        <label class="col-12 col-lg-4 font-weight-bold" for=""> Provincia </label>
+                        <select v-if="states.length > 0" v-model="state" class="form-control col-12 col-lg-4">
                             <option v-for="opt in states" :key="opt.id" :value="opt"> 
                                 {{opt.name}}
                             </option>
                         </select>
                     </div>
                     <div class="col-12 row form-group-row">
-                        <label class="col-4 col-lg-4" for=""> Ciudad </label>
-                        <select v-if="state" v-model="formData.city_id" class="form-control col-8 col-lg-4">
+                        <label class="col-12 col-lg-4 font-weight-bold" for=""> Ciudad </label>
+                        <select v-if="state" v-model="formData.city_id" class="form-control col-12 col-lg-4">
                             <option v-for="opt in state.cities" :key="opt.id" :value="opt.id"> 
                                 {{opt.name}}
                             </option>
                         </select>
                     </div>
                     <div class="col-12 row form-group-row">
-                        <label class="col-4 col-lg-4" for=""> Direccion </label>
-                        <input  type="text" v-model="formData.address"  class="form-control col-8 col-lg-4">
+                        <label class="col-12 col-lg-4 font-weight-bold" for=""> Direccion </label>
+                        <input  type="text" v-model="formData.address"  class="form-control col-12 col-lg-4">
                     </div>
                     <div class="col-12 row form-group-row">
-                        <label class="col-4 col-lg-4" for=""> Transporte </label>
-                        <input  type="text" v-model="formData.transport"  class="form-control col-8 col-lg-4">
+                        <label class="col-12 col-lg-4 font-weight-bold" for=""> Transporte </label>
+                        <input  type="text" v-model="formData.transport"  class="form-control col-12 col-lg-4">
                     </div>
                     <div class="col-12 row form-group-row">
-                        <label class="col-4 col-lg-4" for=""> Codigo Postal </label>
-                        <input  type="text" v-model="formData.cp"  class="form-control col-8 col-lg-4">
+                        <label class="col-12 col-lg-4 font-weight-bold" for=""> Codigo Postal </label>
+                        <input  type="text" v-model="formData.cp"  class="form-control col-12 col-lg-4">
                     </div>
                 </div>
                 <!-- /DATOS DE ENVIO -->
               
                <div class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-4" for="">Email</label>
-                   <input :required="user.role_id > 2" type="email" v-model="formData.email"  class="form-control col-8 col-lg-4">
+                   <label class="col-12 col-lg-4 font-weight-bold" for="">Email</label>
+                   <input :required="user.role_id > 2" type="email" v-model="formData.email"  class="form-control col-12 col-lg-4">
                 </div> 
-               <div class="col-12 row form-group-row mt-2 mb-2">
-                   <label class="col-4 col-lg-4 mt-4" for="">Telefono</label>
-                   <div class="col-6 row">
-                       <div class="col-4 d-flex flex-column">
-                           <label >Codigo de area</label>
+               <div class="col-12 row form-group-row mt-2 mb-2 align-items-center">
+                   <label class="col-11 col-lg-4 offset-1 offset-lg-0 font-weight-bold" > <b> Telefono </b> </label>
+                   <div class="col-12 col-lg-6 row">
+                       <div class="col-12 col-lg-5 d-flex flex-column">
+                           <label >Cod area</label>
                             <input v-model="phone.code" type="text" class="form-control">
                        </div>
-                       <div class="col-4 d-flex flex-column">
-                           <label>Numero de telefono</label>
+                       <div class="col-12 col-lg-7 d-flex flex-column">
+                           <label>Numero</label>
                            <input v-model="phone.number" type="text" class="form-control">
                        </div>
                        <div class="col-12 row mt-1">
@@ -103,8 +103,8 @@
                    
                 </div> 
                <div class="col-12 row form-group-row">
-                   <label class="col-4 col-lg-4" for="">Mensaje</label>
-                   <textarea v-model="formData.message" name="message" class="form-control col-8 col-lg-4"></textarea>
+                   <label class="col-12 col-lg-4 font-weight-bold" for="">Mensaje</label>
+                   <textarea v-model="formData.message" name="message" class="form-control col-12 col-lg-4"></textarea>
                 </div> 
 
            
