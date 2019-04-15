@@ -36,7 +36,7 @@ class SitemapController extends Controller
         }
 
         foreach ($array as $key => $url) {
-            $new = 'mayoristadelmate.com/'. $url;
+            $new = 'matesfabi.com/'. $url;
             $new = str_replace('//','/',$new);
             $new = 'https://'.$new;
             $array[$key] = $new;
