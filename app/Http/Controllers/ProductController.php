@@ -40,7 +40,7 @@ class ProductController extends Controller
 
       public static function detail($categorySlug,$productSlug)
     {
-           $slug = '/'.$categorySlug.'/'.$productSlug;
+           $slug = '/'.$productSlug;
            $product = Product::where('slug',$slug)->get()->first();
            if($product){
                $meta = new Metadata();
