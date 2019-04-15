@@ -14,6 +14,9 @@
 
 Auth::routes();
 
+Route::get('/sitemap.xml','SitemapController@sitemap');
+
+
 Route::middleware('CheckSuper')->prefix('super')->group(function(){
 
     Route::get('/failed-jobs','SuperController@failedJobsView');
