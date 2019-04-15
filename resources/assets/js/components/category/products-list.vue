@@ -27,7 +27,7 @@
                         </div>
                         <div class="h-25">
                             <div class="col-4 d-flex align-items-base">
-                                <a itemprop="url" :href="product.slug" class="btn btn-outline-focus">Ver mas</a>
+                                <a itemprop="url" :href="getSlug(product)" class="btn btn-outline-focus">Ver mas</a>
                                 <a href="/cotizador" class="btn btn-outline-success ml-2"> <span class="fa fa-shopping-cart"></span> Hacer un pedido</a>
                             </div>
                         </div>
@@ -50,6 +50,15 @@ export default {
         }
     },
     methods:{
+          getSlug(product){
+            let cat = this.categories.find(c => {
+                return product.category_id == c.id;
+            } );
+
+            let res = cat.slug + '/' + product.slug;
+            res =res.replace('//','/');
+            return res;
+        },
              show(product){
                 if (product.images[0]){
                     this.carouselProduct = product;
@@ -69,6 +78,7 @@ export default {
             }
     },
         computed : {
+            categories(){return this.$store.getters['categories/getCategories']; },
             config(){
                 return this.$store.getters.getConfig;
             }

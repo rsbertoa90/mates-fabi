@@ -24,7 +24,7 @@
                       <strike style="font-size:1rem" v-if="product.offer && $store && !$store.getters.getConfig.hide_prices" class="text-secondary"> ${{product.price * 1.67 | price}}</strike> 
                     </h4>
                     <p style="height:45px" class="card-text crop-text" itemprop="description"> {{product.description}}</p>
-                    <a :href="product.slug" class="btn btn-outline-second"> Ver mas</a>
+                    <a :href="getSlug(product)" class="btn btn-outline-second"> Ver mas</a>
                 </div>
             </div>
         </swiper-slide>
@@ -67,6 +67,9 @@
         this.render=true;
     },
     computed:{
+      categories(){
+        return this.$store.getters['categories/getCategories'];
+      },
       config(){
         return this.$store.getters.getConfig;
       },
@@ -84,6 +87,15 @@
         }
     },
     methods: {
+       getSlug(product){
+            let cat = this.categories.find(c => {
+                return product.category_id == c.id;
+            } );
+
+            let res = cat.slug + '/' + product.slug;
+            res =res.replace('//','/');
+            return res;
+        },
       appendSlide() {
         this.swiperSlides.push(this.swiperSlides.length + 1)
       },

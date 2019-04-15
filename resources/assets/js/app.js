@@ -48,7 +48,7 @@ Vue.component('app-franquicia', require('./components/franquicia/Franquicia.vue'
 Vue.component('app-search-results', require('./components/search/Results.vue'));
 
 Vue.component('app-admin', ()=>import('./components/admin/Admin.vue'));
-Vue.component('app-super', ()=>import('./components/super/Super.vue'));
+Vue.component('app-super', ()=>import('./components/super/metadata/Super.vue'));
 Vue.component('admin-orders',()=>import('./components/admin/Orders.vue'))
 Vue.component('app-admin', ()=>import('./components/admin/Admin.vue'));
 Vue.component('admin-nav', ()=>import('./components/admin/Admin-nav.vue'));
