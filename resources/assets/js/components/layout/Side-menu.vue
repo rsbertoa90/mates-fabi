@@ -12,7 +12,7 @@
                 </div>
 
 
-             <bannerRedlimp></bannerRedlimp>
+          <!--    <bannerRedlimp></bannerRedlimp> -->
         </div>
  
 </template>

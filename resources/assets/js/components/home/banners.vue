@@ -7,26 +7,21 @@
                 </a>
             </div>
             <div class="col-12 col-lg-4 row p-1 pl-lg-4">
-               <a href="https://mfcarteras.com" target="_blank" class="w-100 mt-2 mt-lg-0">
-                     <v-lazy-image alt="MF carteras" src="/storage/images/banners/home-carteras.png"></v-lazy-image>
-               </a>
-            </div>
-            <div class="col-12 row custom-padded">
-                <div class="col-12 col-lg-4 p-1">
+               <div class="col-12 p-1">
                      <div class="small-banner">
                         <a href="/regalos-empresariales" class="w-100 d-block">
                             <v-lazy-image src="/storage/images/app/regalos-empresariales.png" alt="regalos-empresariales" />
                         </a>
                      </div>
                 </div>
-                <div class="col-12 col-lg-4 p-1">
+                <div class="col-12 p-1">
                       <div class="small-banner ">
                         <a href="/sucursales" class="w-100 d-block">
                             <v-lazy-image src="/storage/images/app/sucursales.png" alt="sucursales" />
                         </a>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4 p-1">
+                <div class="col-12 p-1">
                      
                     <div class="small-banner ">
                         <a href="/franquicia" class="w-100 d-block">
@@ -34,6 +29,9 @@
                         </a>
                     </div>
                 </div>
+            </div>
+            <div class="col-12 row custom-padded">
+                
             </div>
         </div>
     </div>
