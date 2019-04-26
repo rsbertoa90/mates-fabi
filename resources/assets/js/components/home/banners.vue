@@ -30,9 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 row custom-padded">
-                
-            </div>
+           
         </div>
     </div>
 </template>
