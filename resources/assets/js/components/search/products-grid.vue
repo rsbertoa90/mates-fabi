@@ -18,7 +18,7 @@
                         <h5 style="height:40px" class="card-title font-weight-bold" itemprop="name">{{product.name | ucFirst}}</h5>
                         <h5 v-if="config && !config.hide_prices" class="card-subtitle">${{product.price}}</h5>
                       <!--   <p class="card-text"> {{product.description}} </p> -->
-                        <a :href="product.slug" class="btn btn-outline-focus mt-2" itemprop="url">Ver mas</a>
+                        <a :href="getUrl(product)" class="btn btn-outline-focus mt-2" itemprop="url">Ver mas</a>
                         <a href="/cotizador" class="btn btn-outline-success mt-2"> <span class="fa fa-shopping-cart"></span> Hacer un pedido</a>
                     </div>
                 </div>
@@ -38,6 +38,17 @@ export default {
         }
     },
     methods:{
+        getUrl(product){
+            if(this.categories){
+                let cat = this.categories.find(c=>{
+                    return c.id == product.category_id;
+                })
+            let slug =  '/'+cat.slug+'/'+product.slug;
+            slug = slug.replace('//','/');
+            slug = slug.replace('//','/');
+            return slug;
+            }
+        },
          show(product){
                 this.carouselProduct = product;
                 this.showCarousel = true;
@@ -49,6 +60,9 @@ export default {
     }
     ,
     computed : {
+            categories(){
+               return this.$store.getters['categories/getCategories']; 
+            },  
             config(){
                 return this.$store.getters.getConfig;
             }

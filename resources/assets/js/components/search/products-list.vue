@@ -49,6 +49,16 @@ export default {
         }
     },
     methods:{
+         getUrl(product){
+            if(this.categories){
+                let cat = this.categories.find(c=>{
+                    return c.id == product.category_id;
+                })
+            let slug =  '/'+cat.slug+'/'+product.slug;
+            slug = slug.replace('//','/');
+            return slug;
+            }
+        },
          show(product){
                 this.carouselProduct = product;
                 this.showCarousel = true;
@@ -59,6 +69,9 @@ export default {
             }
     },
         computed : {
+             categories(){
+               return this.$store.getters['categories/getCategories']; 
+            },  
             config(){
                 return this.$store.getters.getConfig;
             }

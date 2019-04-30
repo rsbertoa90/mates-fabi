@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Metadata;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
+use App\SearchHistory;
 
 class ProductController extends Controller
 {
@@ -22,6 +24,15 @@ class ProductController extends Controller
     
       // user can provide double space by accident, or on purpose:
       $search = $request->input('search');
+
+      /* Guardo en historial de busquedas */
+      $user = Auth::user();
+      if (!$user || $user->role_id > 2)
+      {
+        SearchHistory::create([
+          'term'=>$search
+        ]);
+      }
 
       // so with explode you get this:
       $array = explode(' ', $search);

@@ -28,3 +28,5 @@ Route::get('/states','StateController@get');
 Route::get('/city/{id}','StateController@getCity');
 
 Route::get('/failedjobs','AdminControllers@failedJobs');
+
+Route::get('/search-history','SerachHistoryController@get');
