@@ -34,6 +34,8 @@ Route::middleware('CheckAdmin')->prefix('admin')->group(function(){
 
     Route::get('/lista-de-precios','PdfController@prices');
 
+    Route::get('/busquedas','AdminController@searchHistory');
+    
     Route::get('/','AdminController@cotizador');
     Route::get('/cotizador','AdminController@cotizador');
 

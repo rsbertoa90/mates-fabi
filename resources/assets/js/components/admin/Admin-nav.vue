@@ -19,6 +19,9 @@
                         <a class="nav-link text-white" href="/admin/ordenes">Pedidos</a>
                     </li>
                     <li class="nav-item ">
+                        <a class="nav-link text-white" href="/admin/busquedas">Busquedas</a>
+                    </li>
+                    <li class="nav-item ">
                         <a class="nav-link text-white" href="/super">Metadatas</a>
                     </li>
                     <li class="nav-item ">

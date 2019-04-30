@@ -53,6 +53,7 @@ Vue.component('admin-orders',()=>import('./components/admin/Orders.vue'))
 Vue.component('app-admin', ()=>import('./components/admin/Admin.vue'));
 Vue.component('admin-nav', ()=>import('./components/admin/Admin-nav.vue'));
 Vue.component('admin-failed-jobs', ()=>import('./components/failedJobs/FailedJobs.vue'));
+Vue.component('admin-search-statics', ()=>import('./components/admin/Search-statics.vue'));
 
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));

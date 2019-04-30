@@ -30,4 +30,9 @@ class AdminController extends Controller
     {
         return FailedJob::all()->orderby('failed_at','desc');
     }
+
+    public function searchHistory()
+    {
+        return view('admin.searchStatics');
+    }
 }
