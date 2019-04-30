@@ -27,36 +27,36 @@ Vue.use(BootstrapVue); */
 
 import VueMq from 'vue-mq'
 
-Vue.component('fade-loader', require('vue-spinner/src/FadeLoader.vue'));
-Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue'));
-Vue.component('cotizer-form', require('./components/cotizer/Cotizer-form.vue'));
-// Vue.component('csrf', require('./components/csrf.vue'));
-Vue.component('app-navbar', require('./components/layout/Navbar.vue'));
-Vue.component('app-footer', require('./components/layout/footer/Footer.vue'));
-Vue.component('app-whatsapp', require('./components/layout/Whatsapp-float.vue'));
-Vue.component('image-logo', require('./components/layout/images/image-logo.vue'));
-Vue.component('app-side-menu', require('./components/layout/Side-menu.vue'));
+Vue.component('fade-loader', require('vue-spinner/src/FadeLoader.vue').default);
+Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue').default);
+Vue.component('cotizer-form', require('./components/cotizer/Cotizer-form.vue').default);
+// Vue.component('csrf', require('./components/csrf.vue').default);
+Vue.component('app-navbar', require('./components/layout/Navbar.vue').default);
+Vue.component('app-footer', require('./components/layout/footer/Footer.vue').default);
+Vue.component('app-whatsapp', require('./components/layout/Whatsapp-float.vue').default);
+Vue.component('image-logo', require('./components/layout/images/image-logo.vue').default);
+Vue.component('app-side-menu', require('./components/layout/Side-menu.vue').default);
 
-Vue.component('app-home-a', require('./components/home/HomeA.vue'));
-Vue.component('app-home-b', require('./components/home/HomeB.vue'));
-Vue.component('app-sucursales', require('./components/sucursales/Sucursales.vue'));
-Vue.component('app-contacto', require('./components/contacto/Contacto.vue'));
-Vue.component('app-category', require('./components/category/Category.vue'));
-Vue.component('app-product', require('./components/product/Product.vue'));
-Vue.component('app-regalos', require('./components/regalos/Regalos.vue'));
-Vue.component('app-franquicia', require('./components/franquicia/Franquicia.vue'));
-Vue.component('app-search-results', require('./components/search/Results.vue'));
+Vue.component('app-home-a', require('./components/home/HomeA.vue').default);
+Vue.component('app-home-b', require('./components/home/HomeB.vue').default);
+Vue.component('app-sucursales', require('./components/sucursales/Sucursales.vue').default);
+Vue.component('app-contacto', require('./components/contacto/Contacto.vue').default);
+Vue.component('app-category', require('./components/category/Category.vue').default);
+Vue.component('app-product', require('./components/product/Product.vue').default);
+Vue.component('app-regalos', require('./components/regalos/Regalos.vue').default);
+Vue.component('app-franquicia', require('./components/franquicia/Franquicia.vue').default);
+Vue.component('app-search-results', require('./components/search/Results.vue').default);
 
-Vue.component('app-admin', ()=>import('./components/admin/Admin.vue'));
-Vue.component('app-super', ()=>import('./components/super/metadata/Super.vue'));
-Vue.component('admin-orders',()=>import('./components/admin/Orders.vue'))
-Vue.component('app-admin', ()=>import('./components/admin/Admin.vue'));
-Vue.component('admin-nav', ()=>import('./components/admin/Admin-nav.vue'));
-Vue.component('admin-failed-jobs', ()=>import('./components/failedJobs/FailedJobs.vue'));
-Vue.component('admin-search-statics', ()=>import('./components/admin/Search-statics.vue'));
+Vue.component('app-admin', require('./components/admin/Admin.vue').default);
+Vue.component('app-super', require('./components/super/metadata/Super.vue').default);
+Vue.component('admin-orders',require('./components/admin/Orders.vue'))
+Vue.component('app-admin', require('./components/admin/Admin.vue').default);
+Vue.component('admin-nav', require('./components/admin/Admin-nav.vue').default);
+Vue.component('admin-failed-jobs', require('./components/failedJobs/FailedJobs.vue').default);
+Vue.component('admin-search-statics', require('./components/admin/Search-statics.vue').default);
 
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 import swal from 'sweetalert';
 window.swal = swal;

@@ -243,7 +243,7 @@ import paginator from '../../admin/paginator.vue';
     top: 0;
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
     padding-top: 5%;
 }
 

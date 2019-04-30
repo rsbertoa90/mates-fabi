@@ -1,7 +1,7 @@
-<template v-if="!viewed">
+<template>
 <transition enter-active-class="animate animated bounceIn">
 
-    <div v-if="scrolled && !viewed" class="overlay ">
+    <div v-if="scrolled && !showed" class="overlay ">
         <div class="image-container ">
             <v-lazy-image :src="imagesrc" ></v-lazy-image>
             <transition enter-active-class="animate animated slideInUp">
@@ -21,7 +21,7 @@
                         <span>Click en una categoria para ver detalles de productos</span>
                     </div>
         </transition>
-        <button class="btn btn-block btn-danger" style="max-width:400px"  @click="viewed=true"> Cerrar </button>
+        <button class="btn btn-block btn-danger" style="max-width:400px"  @click="setShowed"> Cerrar </button>
     </div>
 </transition>
 </template>
@@ -30,7 +30,7 @@
 export default {
     data(){
         return{
-            viewed:false,
+            showed:false,
             scrolled:false,
             enterhand:false,
             clicknow:false,
@@ -44,6 +44,9 @@ export default {
         }
     },
     methods: {
+        setShowed(){
+            this.showed=true;
+        },
     handleScroll () {
         if (!this.scrolled){
             this.scrolled = window.scrollY > 150;
