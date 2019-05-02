@@ -97,7 +97,8 @@ Vue.component('my-app', myApp);
 
 import Routes from './routes.js';
 window.csrf = $('meta[name="csrf-token"]').attr('content');
-Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
+Vue.http.headers.common['X-CSRF-TOKEN'] = window.csrf;
+
 
 const app = new Vue({
     router: Routes,

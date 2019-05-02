@@ -54,7 +54,8 @@ export default {
                 var data = {
                     product : product.id,
                     field : field,
-                    value : product[field]
+                    value : product[field],
+                    _token:window.csrf
                 }
                 if (data.field == 'paused')
                 {
