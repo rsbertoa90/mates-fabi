@@ -1,10 +1,5 @@
 <template>
     <div class="" v-if="user">
-        
-         <div v-if="loading" class="loader">
-            <fade-loader :loading="loading" size="200px"></fade-loader>
-        </div>
-
 
         <h5>Envianos tu pedido</h5>
         <p>Recibiras confirmacion de tu presupuesto por email</p>
@@ -123,7 +118,7 @@ export default{
 
     data(){return{
         state:null,
-        loading:false,
+       
         phone : {
             code: '',
             number: '',
@@ -286,19 +281,6 @@ export default{
 </script>
 
 <style scoped lang="scss">
-.loader {
-    position : fixed;
-    height: 100%;
-    width: 100%;
-    z-index: 110;
-    background-color: #ddddddaa;
-    left: 0;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 5%;
-}
 
     .warn{
         font-size: 0.8rem;

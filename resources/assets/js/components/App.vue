@@ -3,6 +3,9 @@
         <userLayout v-if="!user || user.role_id > 2"></userLayout>
         <admin-layout v-if="user && user.role_id < 3"></admin-layout>
         <total-bouncer></total-bouncer>
+        <div v-if="loading" class="loader">
+            <fade-loader :loading="loading" size="200px"></fade-loader>
+        </div>
     </div>  
 </template>
 
@@ -17,7 +20,12 @@ export default {
     computed:{
         user(){
             return this.$store.getters.getUser;
-        }
+        },
+        loading()
+        {
+            return this.$store.getters.getLoading;
+        },
+
     }
 }
 </script>
@@ -31,5 +39,22 @@ export default {
         border:1px solid #868686;
         overflow: hidden;
     }
+
+    .loader {
+    position : fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 110;
+    background-color: #ddddddaa;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5%;
+}
+
+
+
 </style>
 

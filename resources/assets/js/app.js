@@ -111,8 +111,6 @@ const app = new Vue({
             fetchStates : 'fetchStates',
             fetchMeta:'fetchMeta'
         }),
-        
-
     },
     created()
     { 
@@ -121,7 +119,7 @@ const app = new Vue({
         this.fetchConfig();
         this.fetchStates();
         this.fetchMeta();
-    }
+    },    
 });
 
 

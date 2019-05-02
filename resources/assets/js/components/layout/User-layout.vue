@@ -37,7 +37,32 @@ import appSideMenu from './Side-menu.vue';
 import appWhatsapp from './Whatsapp-float.vue';
 import appFooter from './footer/Footer.vue'; 
 export default {
-    components:{appNavbar,appSideMenu,appWhatsapp,appFooter}
+    components:{appNavbar,appSideMenu,appWhatsapp,appFooter},
+    computed:{
+        categories(){
+            return this.$store.getters.getCategories
+        },
+        config(){ return this.$store.getters.getConfig},
+        metadata(){ return this.$store.getters.getMeta},
+        states(){ return this.$store.getters.getStates},
+    },
+    methods:{
+        stopLoader(){
+           
+            if(this.categories && this.config && this.metadata && this.states)
+            {
+               
+                this.$store.commit('setLoading',false);
+                return false;
+            }
+        }
+    },
+    watch:{
+        categories(){this.stopLoader()},
+        config(){this.stopLoader()},
+        metadata(){this.stopLoader()},
+        states(){this.stopLoader()}
+    }
 }
 </script>
 

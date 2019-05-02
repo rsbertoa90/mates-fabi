@@ -29,7 +29,37 @@
 import appNavbar from '../admin/Admin-nav.vue';
 import appFooter from './footer/Footer.vue'; 
 export default {
-    components:{appNavbar,appFooter}
+    components:{appNavbar,appFooter},
+    mounted(){
+        this.$store.dispatch('fetchOrders');
+    },
+     computed:{
+        categories(){
+            return this.$store.getters.getCategories
+        },
+        config(){ return this.$store.getters.getConfig},
+        metadata(){ return this.$store.getters.getMeta},
+        states(){ return this.$store.getters.getStates},
+        orders(){return this.$store.getters.getOrders}
+    },
+    methods:{
+        stopLoader(){
+         
+            if(this.categories && this.config && this.metadata && this.states && this.orders)
+            {
+               
+                this.$store.commit('setLoading',false);
+                return false;
+            }
+        }
+    },
+    watch:{
+        categories(){this.stopLoader()},
+        config(){this.stopLoader()},
+        metadata(){this.stopLoader()},
+        states(){this.stopLoader()},
+        metadata(){this.stopLoader()}
+    }
 }
 </script>
 

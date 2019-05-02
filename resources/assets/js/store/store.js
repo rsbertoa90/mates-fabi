@@ -5,14 +5,23 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state : {
+        orders:[],
         user : null,
         config : null,
         states:[],
         meta:[],
-        categories: []
+        categories: [],
+        loading:true
     },
     getters :{
-          getTotal(store) {
+        getOrders(store){
+            return store.orders;
+        },
+        getLoading(store)
+        {
+            return store.loading;
+        },
+        getTotal(store) {
                 var tot = 0;
                 if(store.categories && store.categories.length){
                     store.categories.forEach(function(category){
@@ -132,6 +141,13 @@ export const store = new Vuex.Store({
             
     },
     mutations : {
+        setLoading(state, payload)
+        {
+            state.loading = payload;
+        },
+        setOrders(state,payload){
+            state.orders=payload;
+        },
         setMeta(state,payload){
             state.meta=payload;
         },
@@ -209,6 +225,14 @@ export const store = new Vuex.Store({
            Vue.http.get('/api/metadatas')
                .then(response => {
                    commit('setMeta', response.data);
+               });
+       },
+       fetchOrders: ({
+           commit
+       }, payload) => {
+           Vue.http.get('/admin/getOrders')
+               .then(response => {
+                   commit('setOrders', response.data);
                });
        },
     },

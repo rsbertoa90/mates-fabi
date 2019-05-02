@@ -92,7 +92,7 @@ export default {
     data(){
         return {
             searchTerm:'',
-            orders : [],
+           
             status : 'pendiente',
             filtered : [],
             selected : null,
@@ -122,7 +122,13 @@ export default {
     },
    
     computed : {
+        orders(){
+            return this.$store.getters.getOrders;
+        },
         filteredOrders(){
+            if(this.orders){
+
+            
             var vm = this;
             let res = this.orders.filter(order => {
               
@@ -153,13 +159,10 @@ export default {
             res = res.reverse();
          
             return res;
+            }
         }
     },
-    created(){
-        this.$http.get('/admin/getOrders')
-            .then(response => {this.orders = response.data });
-        
-    },
+    
     filters : {
         datetime(val){
             return moment(val).format('DD/MM/YYYY H:mm')
