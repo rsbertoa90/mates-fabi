@@ -8,20 +8,20 @@
                 </div>
             </div>
             <div class="col-6">
-                <form class="form-inline" action="/buscar">
+                <div class="form-inline">
                     <div class="input-group w-100">
                         <input type="text" class="form-control" 
                                  aria-label="Buscar productos"
                                 placeholder="Que estas buscando?"
-                                name="search">
+                                v-model="term" @keyup.enter="search">
                         <div class="input-group-prepend">
-                            <span class="white-bold input-group-text bg-second d-flex justify-content-center" 
+                            <span @click="search" class="white-bold input-group-text bg-second d-flex justify-content-center" 
                                   id="basic-addon1">
                                 Buscar
                             </span>
                         </div>
                     </div>  
-                </form>
+                </div>
             </div>
             <div class="col-3 flex-button">
                 <span class="white-bold bg-second p-2 flex-button rounded" style="width:60px">
@@ -62,6 +62,7 @@ export default {
     },
     data(){
         return{
+            term:'',
             showMenu : false
      }
     },
@@ -69,6 +70,18 @@ export default {
         ...mapGetters({
             categories : 'getCategories'
         }),
+    },
+    methods:{
+        search(){
+            this.$store.commit('setSearchTerm',this.term);
+            if(this.term.length > 2)
+            {
+                if (this.$route.path != '/busqueda')
+                {
+                    this.$router.push('/busqueda');
+                }
+            }
+        }
     }
 }
 </script>

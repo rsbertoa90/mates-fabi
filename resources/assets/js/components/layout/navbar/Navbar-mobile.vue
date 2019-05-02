@@ -16,20 +16,20 @@
                     @click="showMenu = true" >
             <span class="fa fa-bars"></span>
             </button>
-            <form class="form-inline col-10" action="/buscar">
+            <div class="form-inline col-10">
                 <div class="input-group">
                     <input type="text" class="form-control" 
                             aria-label="Buscar productos"
                             name="search"
-                            placeholder="Que estas buscando?">
+                            placeholder="Que estas buscando?" v-model="term" @keyup.enter="search">
                     <div class="input-group-prepend">
-                        <span class="input-group-text bg-second d-flex justify-content-center" id="search-addon">
+                        <span @click="search" class="input-group-text bg-second d-flex justify-content-center" id="search-addon">
                             <span class="fa fa-search text-white font-weight-bold">
                             </span>
                         </span>
                     </div>
                 </div>  
-            </form>
+            </div>
         </nav>
 
     
@@ -52,13 +52,27 @@ export default {
     },
     data(){
         return{
-            showMenu : false
+            showMenu : false,
+            term:'',
      }
     },
     computed :{
         ...mapGetters({
-            categories : 'getCategories'
+            categories : 'getCategories',
+            searchTerm:'getSearchTerm'
         }),
+    },
+     methods:{
+        search(){
+            this.$store.commit('setSearchTerm',this.term);
+            if(this.term.length > 2)
+            {
+                if (this.$route.path != '/busqueda')
+                {
+                    this.$router.push('/busqueda');
+                }
+            }
+        }
     }
 }
 </script>

@@ -93,7 +93,7 @@ Route::get('/getUser','HomeController@getUser');
 
 Route::post('/cotizer/send','OrderController@create');
 
-
+Route::post('/searchHistory','SearchHistoryController@save');
 
 Route::post('/suscription','SuscriptionController@create');
 

@@ -11,9 +11,13 @@ export const store = new Vuex.Store({
         states:[],
         meta:[],
         categories: [],
-        loading:true
+        loading:true,
+        searchTerm:'',
     },
     getters :{
+        getSearchTerm(store){
+            return store.searchTerm;
+        },
         getOrders(store){
             return store.orders;
         },
@@ -141,6 +145,14 @@ export const store = new Vuex.Store({
             
     },
     mutations : {
+        setSearchTerm(state,payload)
+        {
+            if(payload.length > 2)
+            {
+                Vue.http.post('/searchHistory',{term:payload});
+            }
+            state.searchTerm = payload;
+        },
         setLoading(state, payload)
         {
             state.loading = payload;

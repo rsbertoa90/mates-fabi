@@ -141,6 +141,13 @@ const router = new VueRouter({
             name: 'sucursales',
             component: Sucursales
         },
+        
+        {
+            path: '/busqueda',
+            name: 'busqueda',
+            component: Busqueda
+        },
+        
         {
             path: '/:category_slug',
             component: CategoryRouter,

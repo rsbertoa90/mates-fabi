@@ -19,7 +19,7 @@
                         <h5 v-if="config && !config.hide_prices" class="card-subtitle">${{product.price}}</h5>
                       <!--   <p class="card-text"> {{product.description}} </p> -->
                         <router-link :to="getUrl(product)" class="btn btn-outline-focus mt-2" itemprop="url">Ver mas</router-link>
-                        <a href="/cotizador" class="btn btn-outline-success mt-2"> <span class="fa fa-shopping-cart"></span> Hacer un pedido</a>
+                        <shopButton :product="product"></shopButton>
                     </div>
                 </div>
         </div>   
@@ -28,9 +28,10 @@
 </template>
 
 <script>
- import carousel from '../cotizer/Carousel.vue';
+import shopButton from '../category/product/shop-button.vue';
+import carousel from '../cotizer/Carousel.vue';
 export default {
-    components:{carousel},
+    components:{carousel,shopButton},
     props:['products'],
     data(){
         return {

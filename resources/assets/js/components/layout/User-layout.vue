@@ -13,7 +13,7 @@
                     <main class="py-4 w-100 row">
                         
                         <div class="col-12 overflow-hidden">
-                            <transition enter-active-class="animated slideInLeft ">
+                            <transition enter-active-class="animated slideInLeft " appear>
                                 <router-view></router-view>
                             </transition>
                         </div>
