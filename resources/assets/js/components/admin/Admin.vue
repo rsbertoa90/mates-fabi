@@ -84,6 +84,8 @@ import adminCreate from './Create.vue';
 import productRow from './product-row.vue';
 import { mapActions } from 'vuex';
     export default {
+         metaInfo(){return{
+        title: 'ADMIN'   }},
         components : {
           
             adminCreate : adminCreate,
@@ -112,7 +114,7 @@ import { mapActions } from 'vuex';
         },
         computed : {
             categories(){
-                return this.$store.getters['categories/getCategories'];
+                return this.$store.getters.getCategories;
             },
             config(){
                 return this.$store.getters.getConfig;
@@ -193,7 +195,7 @@ import { mapActions } from 'vuex';
             refresh(){
                 
                 var vm = this;
-                this.$store.dispatch('categories/fetch');
+                this.$store.dispatch('fetchCategories');
                 if (vm.selectedCategory){
                     setTimeout(() => {
                         vm.selectedCategory = vm.categories.find(c => {

@@ -6,7 +6,7 @@
       <!-- swiper -->
       <swiper :options="swiperOption" v-if="render">
         <swiper-slide  v-for="product in products" :key="product.id" v-if="!product.paused">
-            <a :href="product.slug" class="card" itemscope itemtype="https://schema.org/Product">
+            <router-link :to="getSlug(product)" class="card" itemscope itemtype="https://schema.org/Product">
                 <div>
                   <v-lazy-image v-if ="product.images[0]" class="card-img card-img-top" 
                         :src="product.images[0].url"
@@ -25,10 +25,10 @@
                       <strike style="font-size:1rem"  v-if="product.offer && !$store.getters.getConfig.hide_prices" class="text-secondary"> ${{product.price * 1.67 | price}}</strike> 
                     </h4>
                    
-                    <a :href="getSlug(product)" style="cursor:pointer" class="btn btn-outline-second  white-bold mb-4 mt-1"> Ver mas</a>
+                    <router-link :to="getSlug(product)" style="cursor:pointer" class="btn btn-outline-second  white-bold mb-4 mt-1"> Ver mas</router-link>
                     <p></p>
                 </div>
-            </a>
+            </router-link>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -71,10 +71,15 @@
     },
     computed:{
       categories(){
-        return this.$store.getters['categories/getCategories'];
+        return this.$store.getters.getCategories;
       },
         category(){
-            return this.$store.getters['categories/getCategory'](this.category_id);
+            if(this.categories)
+            {
+              return this.categories.find(c=>{
+                return c.id == this.category_id;
+              })
+            }
         },
         products(){
             return this.category.products;

@@ -88,7 +88,7 @@ import paginator from '../../admin/paginator.vue';
                 return this.products ? false : true;
             },
             categories(){
-                return this.$store.getters['categories/getCategories'];
+                return this.$store.getters['getCategories'];
             },
             products(){
                 if (this.categories)
@@ -218,7 +218,7 @@ import paginator from '../../admin/paginator.vue';
          
             refresh(){
                 var vm = this;
-                this.$store.dispatch('categories/fetch');
+                this.$store.dispatch('fetchCategories');
             },
            
           

@@ -6,14 +6,14 @@
               :key="category.id">
               
             <div class="card" itemscope itemtype="https://schema.org/Product">
-                <a :href="category.slug"  class="d-block w-100" itemprop="url">
+                <router-link :to="category.slug"  class="d-block w-100" itemprop="url">
                     <v-lazy-image itemprop="image" class="card-img-top onhover" :src="category.image" 
                                             :alt="category.name" />
                     <div class="card-body">
                         <h5 class="card-title" itemprop="name"> {{category.name | ucFirst}} </h5>
                         <p v-if="category.homedescription" class="card-text crop-text texto" itemprop="description"> {{category.homedescription}} </p>
                     </div>
-                </a>
+                </router-link>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
 export default {
     computed : {
         categories(){
-            return this.$store.getters['categories/getCategories'];
+            return this.$store.getters.getCategories;
         }
     }
 }

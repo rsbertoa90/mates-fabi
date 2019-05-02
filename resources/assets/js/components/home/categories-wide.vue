@@ -6,7 +6,7 @@
                 :key="category.id" class="d-flex align-items-stretch">
                 
                 <div class="card" itemscope itemtype="https://schema.org/Product">
-                    <a :href="category.slug"  class="d-block w-100 overflow-hidden" itemprop="url">
+                    <router-link :to="category.slug"  class="d-block w-100 overflow-hidden" itemprop="url">
                         <div class="card-img-top overflow-hidden">
                             <v-lazy-image itemprop="image" class=" onhover" :src="category.image" 
                                                     :alt="category.name" />
@@ -15,7 +15,7 @@
                             <h5 class="card-title" itemprop="name"> {{category.name | ucFirst}} </h5>
                             <p v-if="category.homedescription" class="texto card-text crop-text" itemprop="description"> {{category.homedescription}} </p>
                         </div>
-                    </a>
+                    </router-link>
                 </div>
             </swiper-slide>
         </swiper>
@@ -39,7 +39,7 @@ export default {
     },
     computed : {
         categories(){
-            return this.$store.getters['categories/getCategories'];
+            return this.$store.getters.getCategories;
         }
     }
 }

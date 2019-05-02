@@ -2,31 +2,31 @@
     <div >
         <div class="row ml-1 ml-lg-0">
             <div class="col-12 col-lg-8 p-1">
-                <a href="/cotizador" class="w-100 d-block">
+                <router-link to="/cotizador" class="w-100 d-block">
                    <v-gif :images="gifImages" alt="cotizador" :speed="500" />
-                </a>
+                </router-link>
             </div>
             <div class="col-12 col-lg-4 row p-1 pl-lg-4">
                <div class="col-12 p-1">
                      <div class="small-banner">
-                        <a href="/regalos-empresariales" class="w-100 d-block">
+                        <router-link to="/regalos-empresariales" class="w-100 d-block">
                             <v-lazy-image src="/storage/images/app/regalos-empresariales.png" alt="regalos-empresariales" />
-                        </a>
+                        </router-link>
                      </div>
                 </div>
                 <div class="col-12 p-1">
                       <div class="small-banner ">
-                        <a href="/sucursales" class="w-100 d-block">
+                        <router-link to="/sucursales" class="w-100 d-block">
                             <v-lazy-image src="/storage/images/app/sucursales.png" alt="sucursales" />
-                        </a>
+                        </router-link>
                     </div>
                 </div>
                 <div class="col-12 p-1">
                      
                     <div class="small-banner ">
-                        <a href="/franquicia" class="w-100 d-block">
+                        <router-link to="/franquicia" class="w-100 d-block">
                             <v-lazy-image src="/storage/images/app/franquicia.png" alt="franquicia" />
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </div>

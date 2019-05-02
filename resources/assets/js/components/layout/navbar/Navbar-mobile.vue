@@ -1,6 +1,6 @@
 <template>
     <div class="w-100">
-        <div class="row d-flex justify-content-center">
+        <div class=" d-flex justify-content-center">
             <div class="w-50 p-3 ">
                 <image-logo></image-logo>
             </div>
@@ -10,11 +10,11 @@
             <overlay-menu v-if="showMenu" :categories='categories' 
                         @close="showMenu=false"></overlay-menu>
         </transition>
-             <nav class="navbar navbar-expand-lg navbar-dark bg-first row">
-             <button aria-label="menu" class="navbar-toggler col-1 offset-1 bg-second d-flex justify-content-center align-items-center
-                            text-white font-weight-bold" 
-                     @click="showMenu = true" >
-                <span class="fa fa-bars"></span>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-first row">
+            <button aria-label="menu" class="navbar-toggler col-1 p-1 offset-1 bg-second d-flex justify-content-center align-items-center
+                        text-white font-weight-bold" 
+                    @click="showMenu = true" >
+            <span class="fa fa-bars"></span>
             </button>
             <form class="form-inline col-10" action="/buscar">
                 <div class="input-group">
@@ -57,7 +57,7 @@ export default {
     },
     computed :{
         ...mapGetters({
-            categories : 'categories/getCategories'
+            categories : 'getCategories'
         }),
     }
 }

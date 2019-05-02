@@ -12,7 +12,7 @@ window.Vue = Vue;
 
 var VueResource = require('vue-resource');
 Vue.use(VueResource);
-Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
+
 // Vue.http.interceptors.push(function (request, next) {
 //     request.headers['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
 //     next();
@@ -28,32 +28,6 @@ Vue.use(BootstrapVue); */
 import VueMq from 'vue-mq'
 
 Vue.component('fade-loader', require('vue-spinner/src/FadeLoader.vue').default);
-Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue').default);
-Vue.component('cotizer-form', require('./components/cotizer/Cotizer-form.vue').default);
-// Vue.component('csrf', require('./components/csrf.vue').default);
-Vue.component('app-navbar', require('./components/layout/Navbar.vue').default);
-Vue.component('app-footer', require('./components/layout/footer/Footer.vue').default);
-Vue.component('app-whatsapp', require('./components/layout/Whatsapp-float.vue').default);
-Vue.component('image-logo', require('./components/layout/images/image-logo.vue').default);
-Vue.component('app-side-menu', require('./components/layout/Side-menu.vue').default);
-
-Vue.component('app-home-a', require('./components/home/HomeA.vue').default);
-Vue.component('app-home-b', require('./components/home/HomeB.vue').default);
-Vue.component('app-sucursales', require('./components/sucursales/Sucursales.vue').default);
-Vue.component('app-contacto', require('./components/contacto/Contacto.vue').default);
-Vue.component('app-category', require('./components/category/Category.vue').default);
-Vue.component('app-product', require('./components/product/Product.vue').default);
-Vue.component('app-regalos', require('./components/regalos/Regalos.vue').default);
-Vue.component('app-franquicia', require('./components/franquicia/Franquicia.vue').default);
-Vue.component('app-search-results', require('./components/search/Results.vue').default);
-
-Vue.component('app-admin', require('./components/admin/Admin.vue').default);
-Vue.component('app-super', require('./components/super/metadata/Super.vue').default);
-Vue.component('admin-orders',require('./components/admin/Orders.vue'))
-Vue.component('app-admin', require('./components/admin/Admin.vue').default);
-Vue.component('admin-nav', require('./components/admin/Admin-nav.vue').default);
-Vue.component('admin-failed-jobs', require('./components/failedJobs/FailedJobs.vue').default);
-Vue.component('admin-search-statics', require('./components/admin/Search-statics.vue').default);
 
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
@@ -67,7 +41,7 @@ $.ajaxSetup({
     }
 });
 
-window.csrf = $('meta[name="csrf-token"]').attr('content');
+
 
 
 
@@ -118,16 +92,24 @@ import { VLazyImagePlugin } from "v-lazy-image";
 
 Vue.use(VLazyImagePlugin);
 
+import myApp from './components/App.vue';
+Vue.component('my-app', myApp);
+
+import Routes from './routes.js';
+window.csrf = $('meta[name="csrf-token"]').attr('content');
+Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
 
 const app = new Vue({
+    router: Routes,
     el: '#app',
     store,
     methods : {
         ...mapActions({
-            fetchCategories : 'categories/fetch',
+            fetchCategories : 'fetchCategories',
             fetchUser : 'fetchUser',
             fetchConfig : 'fetchConfig',
             fetchStates : 'fetchStates',
+            fetchMeta:'fetchMeta'
         }),
         
 
@@ -138,6 +120,7 @@ const app = new Vue({
         this.fetchUser();
         this.fetchConfig();
         this.fetchStates();
+        this.fetchMeta();
     }
 });
 

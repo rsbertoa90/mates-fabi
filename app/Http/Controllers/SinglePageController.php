@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use View;
+use App\Metadata;
+use App\Category;
+use App\Product;
 
 class SinglePageController extends Controller
 {
-    
+    //
+
     public function resolveMetadata($uri)
     {
     $metadata = Metadata::where('page',$uri)->get()->first();
@@ -98,5 +104,6 @@ class SinglePageController extends Controller
    
     return View::make('myapp',compact('metadata'));
     }
+
 
 }

@@ -31,7 +31,7 @@ class MetadataController extends Controller
         $pages = ['home',
                   'cotizador',
                   'franquicia',
-                  'regalos empresariales',
+                  'regalos-empresariales',
                   'contacto',
                   'sucursales'];
         

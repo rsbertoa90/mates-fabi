@@ -34,10 +34,10 @@ Route::middleware('CheckAdmin')->prefix('admin')->group(function(){
 
     Route::get('/lista-de-precios','PdfController@prices');
 
-    Route::get('/busquedas','AdminController@searchHistory');
+   /*  Route::get('/busquedas','AdminController@searchHistory'); */
     
-    Route::get('/','AdminController@cotizador');
-    Route::get('/cotizador','AdminController@cotizador');
+    /* Route::get('/','AdminController@cotizador'); */
+   /*  Route::get('/cotizador','AdminController@cotizador'); */
 
     Route::post('/category','CategoryController@create');
     Route::put('/category','CategoryController@update');
@@ -52,7 +52,7 @@ Route::middleware('CheckAdmin')->prefix('admin')->group(function(){
     Route::delete('/product/image/{id}','ProductImageController@destroy');
 
     Route::put('/order','OrderController@edit');
-    Route::get('/ordenes','AdminController@orders');
+   /*  Route::get('/ordenes','AdminController@orders'); */
     Route::get('/getOrders','OrderController@getOrders');
 
     Route::put('/config','ConfigController@update');
@@ -63,19 +63,24 @@ Route::middleware('CheckAdmin')->prefix('admin')->group(function(){
 Route::get('/pdf/{order}','OrderController@toPDF');
 
 Route::get('/config','ConfigController@get');
-
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home', function(){return redirect('/');});
-
+/* 
+Route::get('/', 'HomeController@index')->name('home'); */
+/* Route::get('/home', function(){return redirect('/');}); */
+/* 
 Route::get('/cotizador','HomeController@cotizer');
-Route::get('/regalos-empresariales','HomeController@regalosEmpresariales');
+Route::get('/regalos-empresariales','HomeController@regalosEmpresariales'); */
+
 Route::post('/regalos-empresariales','MailController@regalosEmpresariales')->middleware('OptimizeImages');;
-Route::get('/franquicia','HomeController@franquicia');
+/* 
+Route::get('/franquicia','HomeController@franquicia'); */
 Route::post('/franquicia','MailController@franquicia');
+/* 
 Route::get('/sucursales','HomeController@sucursales');
-Route::get('/contacto','HomeController@contacto');
+Route::get('/contacto','HomeController@contacto'); */
+
 Route::post('/contacto','MailController@contacto');
-Route::get('/buscar','ProductController@searchResults');
+
+/* Route::get('/buscar','ProductController@searchResults'); */
 
 Route::get('/logout',function(){
     Auth::logout();
@@ -94,6 +99,9 @@ Route::post('/suscription','SuscriptionController@create');
 
 /* ESTAS RUTAS SIEMPRE AL FINAL */
 
+Route::get('/{any}','SinglePageController@index')->where('any', '.*');
+/* 
+
 Route::get('/{category}','CategoryController@detail');
 
-Route::get('/{category}/{product}','ProductController@detail');
+Route::get('/{category}/{product}','ProductController@detail'); */

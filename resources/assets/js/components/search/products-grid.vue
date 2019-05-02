@@ -18,7 +18,7 @@
                         <h5 style="height:40px" class="card-title font-weight-bold" itemprop="name">{{product.name | ucFirst}}</h5>
                         <h5 v-if="config && !config.hide_prices" class="card-subtitle">${{product.price}}</h5>
                       <!--   <p class="card-text"> {{product.description}} </p> -->
-                        <a :href="getUrl(product)" class="btn btn-outline-focus mt-2" itemprop="url">Ver mas</a>
+                        <router-link :to="getUrl(product)" class="btn btn-outline-focus mt-2" itemprop="url">Ver mas</router-link>
                         <a href="/cotizador" class="btn btn-outline-success mt-2"> <span class="fa fa-shopping-cart"></span> Hacer un pedido</a>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ export default {
     ,
     computed : {
             categories(){
-               return this.$store.getters['categories/getCategories']; 
+               return this.$store.getters.getCategories; 
             },  
             config(){
                 return this.$store.getters.getConfig;

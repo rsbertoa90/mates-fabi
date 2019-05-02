@@ -2,12 +2,12 @@
     
     <div class="row mt-4">
         <div class="col-12">
-            <a href="/admin/lista-de-precios" class="btn btn-outline-info">  
+            <router-link to="/admin/lista-de-precios" class="btn btn-outline-info">  
                 Refrescar Lista de Precios
-            </a>
-            <a href="/super/failed-jobs" class="btn btn-outline-danger">  
+            </router-link>
+            <router-link to="/super/failed-jobs" class="btn btn-outline-danger">  
                 Failed jobs
-            </a>
+            </router-link>
         </div>
         <div class="col-12 row" v-if="configs">
             <div class="col-12">
@@ -58,6 +58,8 @@ import metaCategories from './categories.vue';
 import metaPages from './pages.vue'
 import metaProducts from './products.vue'
 export default {
+     metaInfo(){return{
+        title: 'ADMIN'   }},
     components : {
         metaCategories,
         metaPages,

@@ -119,10 +119,7 @@
 
 <script>
 export default{
-    props : {
-        list : {default : []},
-        total : {default : 0}
-    },
+    
 
     data(){return{
         state:null,
@@ -148,6 +145,12 @@ export default{
        
     }},
     computed : {
+        list(){
+            return this.$store.getters.getList;
+        },
+        total(){
+            return this.$store.getters.getTotal;
+        },
         configs(){
             return this.$store.getters.getConfig;
         },

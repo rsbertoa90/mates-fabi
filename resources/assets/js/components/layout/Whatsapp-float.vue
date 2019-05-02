@@ -7,6 +7,7 @@
 
 <style scoped>
     .floating{
+        cursor: pointer;
         position: fixed;
         z-index:100;
         bottom:10px;

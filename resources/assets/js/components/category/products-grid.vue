@@ -21,8 +21,8 @@
                         <h5 style="height:40px" class="card-title font-weight-bold" itemprop="name">{{product.name | ucFirst}}</h5>
                         <h5 v-if="config && !config.hide_prices" class="card-subtitle">${{product.price}}</h5>
                       <!--   <p class="card-text"> {{product.description}} </p> -->
-                        <a :href="getSlug(product)" class="btn btn-outline-focus mt-2" itemprop="url">Ver mas</a>
-                        <a href="/cotizador" class="btn btn-outline-success mt-2"> <span class="fa fa-shopping-cart"></span> Hacer un pedido</a>
+                        <router-link :to="getSlug(product)" class="btn btn-outline-focus mt-2" itemprop="url">Ver mas</router-link>
+                        <shop-button :product="product"></shop-button>
                     </div>
                 </div>
         </div>   
@@ -31,9 +31,10 @@
 </template>
 
 <script>
+import shopButton from './product/shop-button.vue';
  import carousel from '../cotizer/Carousel.vue';
 export default {
-    components:{carousel},
+    components:{carousel,shopButton},
     props:['products'],
     data(){
         return {
@@ -71,7 +72,7 @@ export default {
     ,
     computed : {
             categories(){
-                return this.$store.getters['categories/getCategories'];   
+                return this.$store.getters.getCategories;   
             },
             config(){
                 return this.$store.getters.getConfig;

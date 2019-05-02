@@ -11,7 +11,7 @@
             </div>
             <div class="col-12 col-lg-6 ">
                 
-                  <span class="texto"> {{category.description}} </span>  
+                  <p v-html="category.description" v-if="category.description">  </p>  
             
             </div>
         </div>
@@ -121,19 +121,48 @@ import productsGrid from './products-grid.vue';
 import productsList from './products-list.vue';
 export default {
     components : {productsGrid,productsList},
-    props : ['category_id'],
-    created(){
-        console.log( $('texto'));
-        $('.texto').each(txt => {
-            console.log(txt);
-        let texto = txt.val();
-        texto = texto.replace(/\n/g, "<br />");
-        $(txt).html(texto);
-});
+     metaInfo(){
+        return{
+            title: this.metatitle,
+            meta:[
+                {name:'description',vmid:'description',content:this.metadescription}
+            ]
+        }
+    },
+    mounted(){
+        if (this.category && this.category.description)
+        {
+            this.category.description = this.category.description.replace(/\n/g, "<br />");
+        }
     },
     computed : {
+        categories(){
+            return this.$store.getters.getCategories;
+        },
         category(){
-            return this.$store.getters['categories/getCategory'](this.category_id);
+            if (this.categories)
+            {
+                return this.categories.find (cat => {
+                    let slug = '/'+cat.slug;
+                    slug = slug.replace('//','/');
+                    slug = slug.replace('//','/');
+                    return slug === '/'+this.$route.params.category_slug;
+                });
+            }
+        },
+        metatitle(){
+            if (this.category)
+            {
+               return this.category.metatitle ? this.category.metatitle : this.category.name+' '+"por mayor";
+            }
+        },
+        metadescription(){
+            if (this.category){
+                if (this.category.metadescription){ return this.category.metadescription}
+                else if (this.category.description){ return this.category.description}
+                else {return this.metatitle}
+            }
+
         },
         products(){
             

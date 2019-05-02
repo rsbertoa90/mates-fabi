@@ -40,11 +40,11 @@
             </div>
             <div class="row col-9">
                 <ul class="navbar">
-                    <li> <a href="/cotizador"> Hace tu pedido</a></li>
-                    <li> <a href="/regalos-empresariales"> Regalos Empresariales</a></li>
-                    <li> <a href="/sucursales"> Sucursales</a></li>
-                    <li> <a href="/contacto"> Contacto</a></li>
-                    <li> <a href="/franquicia"> Franquicia</a></li>
+                    <li> <router-link to="/cotizador"> Hace tu pedido</router-link></li>
+                    <li> <router-link to="/regalos-empresariales"> Regalos Empresariales</router-link></li>
+                    <li> <router-link to="/sucursales"> Sucursales</router-link></li>
+                    <li> <router-link to="/contacto"> Contacto</router-link></li>
+                    <li> <router-link to="/franquicia"> Franquicia</router-link></li>
                 </ul>
             </div>
         </div>
@@ -67,7 +67,7 @@ export default {
     },
     computed :{
         ...mapGetters({
-            categories : 'categories/getCategories'
+            categories : 'getCategories'
         }),
     }
 }

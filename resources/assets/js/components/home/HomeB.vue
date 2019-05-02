@@ -15,10 +15,10 @@
         </div>
 
         <div mt-4>
-            <a href="/cotizador" class="d-flex w-100 justify-content-center">
+            <router-link to="/cotizador" class="d-flex w-100 justify-content-center">
                 <v-lazy-image v-if="$mq == 'lg'" src="/storage/images/app/bannerCotizador.png" alt="presupuesto" />
                 <v-lazy-image v-else src="/storage/images/app/banner-cotizador-mobile.png" alt="presupuesto" />
-            </a>
+            </router-link>
         </div>
 
        <!--  <home-maps></home-maps> -->

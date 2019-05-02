@@ -4,15 +4,15 @@
            
                 <div class="col-9 col-lg-4 p-0">
                     <ul v-on-click-outside="close"> 
-                        <li v-for="route in routes" :key="route.url">
-                            <a :href="route.url">
+                        <li v-for="route in routes" :key="route.url" @click="close">
+                            <router-link :to="route.url">
                                 {{route.name | ucFirst}}
-                            </a>
+                            </router-link>
                         </li>
-                        <li v-for="category in categories" :key="category.id">
-                            <a :href="category.slug">
+                        <li v-for="category in categories" :key="category.id" @click="close">
+                            <router-link :to="category.slug">
                                 {{category.name | ucFirst}}
-                            </a>
+                            </router-link>
                         </li>
                     
                     </ul>
@@ -49,7 +49,7 @@ export default {
     },
     computed :{
         ...mapGetters({
-            categories : 'categories/getCategories',
+            categories : 'getCategories',
 
         }),
     },

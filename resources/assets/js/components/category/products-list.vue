@@ -27,8 +27,8 @@
                         </div>
                         <div class="h-25">
                             <div class="col-4 d-flex align-items-base">
-                                <a itemprop="url" :href="getSlug(product)" class="btn btn-outline-focus">Ver mas</a>
-                                <a href="/cotizador" class="btn btn-outline-success ml-2"> <span class="fa fa-shopping-cart"></span> Hacer un pedido</a>
+                                <router-link itemprop="url" :to="getSlug(product)" class="btn btn-outline-focus">Ver mas</router-link>
+                                <shop-button :product="product"></shop-button>
                             </div>
                         </div>
                 
@@ -40,9 +40,10 @@
 </template>
 
 <script>
+import shopButton from './product/shop-button.vue';
  import carousel from '../cotizer/Carousel.vue';
 export default {
-    components:{carousel},
+    components:{carousel,shopButton},
     props:['products'],
     data(){
         return {
@@ -78,7 +79,7 @@ export default {
             }
     },
         computed : {
-            categories(){return this.$store.getters['categories/getCategories']; },
+            categories(){return this.$store.getters.getCategories; },
             config(){
                 return this.$store.getters.getConfig;
             }

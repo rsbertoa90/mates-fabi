@@ -4,9 +4,9 @@
                 <div class="side-borders">
                    <ul clas="d-flex pl-4">
                        <li v-for="category in categories" :key ="category.id">
-                           <a :href="category.slug">
+                           <router-link :to="category.slug">
                                 {{category.name| ucFirst}}
-                           </a>
+                           </router-link>
                        </li>
                    </ul>
                 </div>
@@ -26,7 +26,7 @@ export default {
     },
     computed : {
            ...mapGetters({
-                categories : 'categories/getCategories'
+                categories : 'getCategories'
             }),
     }
 }

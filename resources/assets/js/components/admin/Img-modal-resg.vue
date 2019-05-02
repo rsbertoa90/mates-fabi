@@ -109,6 +109,7 @@
                     var fdata =  new FormData();
                     fdata.append('image',file);
                     fdata.append('product',this.product.id)
+                    fdata.append('_token',window.csrf);
                     // console.log(fdata);
                     
     

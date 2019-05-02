@@ -60,11 +60,8 @@ export default {
                 {
                     data.value = data.value ? 1 : 0;
                 }
-                $.ajax({
-                    method : 'put',
-                    data : data,
-                    url : '/admin/product'
-                });
+                this.$http.put('/admin/product',data);
+                
             },
             deleteProduct(product){
                 var vm = this;
@@ -95,11 +92,8 @@ export default {
                     field : 'offer',
                     value : product.offer ? 1 : 0
                 }
-                $.ajax({
-                    method : 'put',
-                    data : data,
-                    url : '/admin/product'
-                });
+                this.$http.put('/admin/product',data)
+                
             },
             togglePause(product){
                 var vm = this;

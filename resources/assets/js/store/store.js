@@ -2,14 +2,59 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
-import categories from './modules/categories.js'
+
 export const store = new Vuex.Store({
     state : {
         user : null,
         config : null,
-        states:[]
+        states:[],
+        meta:[],
+        categories: []
     },
     getters :{
+          getTotal(store) {
+                var tot = 0;
+                if(store.categories && store.categories.length){
+                    store.categories.forEach(function(category){
+                        category.products.forEach(function(product){
+                            if (product.units > 0)
+                            {
+                                
+                               tot+= product.price * product.units
+                                
+                            }
+                        });
+                    });
+                }
+                return tot;
+            },
+        getList(store) {
+            if (store.categories && store.categories.length){
+                var result = [];
+                store.categories.forEach(function (category) {
+                    var prods = category.products.filter(function (el) {
+                        return (el.units != null & el.units > 0);
+                    });
+                    if (prods.length > 0) {
+                        result.push(prods);
+                    }
+                });
+                return [].concat.apply([], result);
+            }
+
+
+        },
+
+        getMeta: store => page => {
+            if (store.meta)
+            {
+               
+                return store.meta.find(m=>{
+                   
+                    return m.page.trim() == page.trim();
+                });
+            }
+        },
         getUser(store){
             return store.user;
         },
@@ -31,9 +76,65 @@ export const store = new Vuex.Store({
                     }
                 })  ;
             }
-        }
+        },
+             getCategories(state) {
+                return state.categories;
+            },
+            getCategory: (state) => (id) => {
+                if (state.categories.length > 0) {
+                    return state.categories.find(cat => {
+                        return cat.id == id;
+                    });
+                }
+            },
+            getProducts(state) {
+                let prods = [];
+                if (state.categories.length > 0) {
+                    state.categories.forEach(category => {
+                        prods.concat(category.products);
+                    });
+                }
+                return prods;
+            },
+            getProduct: (state) => (id) => {
+                var res = null;
+                if (state.categories.length > 0) {
+                    state.categories.forEach(cat => {
+
+                        var prod = cat.products.find(p => {
+                            return p.id == id
+                        });
+                        if (prod) {
+
+                            res = prod;
+
+                        }
+                    });
+                    return res;
+
+                }
+            },
+            getOffers(state) {
+                let prods = [];
+                if (state.categories.length > 0) {
+                    state.categories.forEach(category => {
+                        category.products.forEach(product => {
+
+                            if (product.offer) {
+                                prods.push(product);
+                            }
+                        });
+                    });
+                }
+
+                return prods;
+            },
+            
     },
     mutations : {
+        setMeta(state,payload){
+            state.meta=payload;
+        },
         setUser(state,payload){
             state.user = payload;
            
@@ -43,9 +144,38 @@ export const store = new Vuex.Store({
         },
         setStates(state,payload){
             state.states = payload
-        }
+        },
+         setProductUnits: (state, payload) => {
+                 let prod = payload;
+                 state.categories.forEach(c => {
+                     c.products.forEach(p => {
+                         if (p.id == prod.id) {
+                            
+                             Vue.set(p, 'units', prod.units);
+                         }
+                     });
+                 });
+             },
+             updateCategories: (state, payload) => {
+                 state.categories = payload;
+             },
+             saveCategory: (state, category) => {
+                 state.categories.push(category);
+             },
+             
     },
-    actions : {
+    actions: {
+            fetchCategories: ({
+                commit
+            }, payload) => {
+
+                Vue.http.get('/api/categories')
+                    .then(response => {
+                        let cats = _.sortBy(response.data, 'name');
+
+                        commit('updateCategories', cats);
+                    });
+            },
        fetchUser: ({
            commit
        }, payload) => {
@@ -73,10 +203,16 @@ export const store = new Vuex.Store({
                    commit('setStates', response.data);
                });
        },
+       fetchMeta: ({
+           commit
+       }, payload) => {
+           Vue.http.get('/api/metadatas')
+               .then(response => {
+                   commit('setMeta', response.data);
+               });
+       },
     },
-    modules : {
-        categories
-    }
+   
 
 });
 
