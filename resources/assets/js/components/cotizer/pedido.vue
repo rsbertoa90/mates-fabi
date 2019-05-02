@@ -1,5 +1,5 @@
 <template>
-    <div v-if="list && list.length > 0" class="mt-5">
+    <div v-if="list && list.length > 0" class="mt-5 table-container">
         <h5>Pedido actual:</h5>
         <table class="table table-striped">
             <thead>
@@ -45,5 +45,9 @@ export default {
 <style scoped>
     .table{
         font-size:1rem;
+    }
+
+    .table-container{
+        overflow-x:auto;
     }
 </style>
