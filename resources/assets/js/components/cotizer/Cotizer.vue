@@ -110,6 +110,14 @@ import metadataMixin from '../metadataMixin.js';
           
         },
 
+        mounted()
+        {
+            if (this.user && this.user.role_id < 3)
+            {
+                this.$store.dispatch('fetchCategories');
+            }
+        }
+
       
     }
 </script>

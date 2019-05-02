@@ -15,7 +15,7 @@ class PdfController extends Controller
     {
         Queue::push(new GeneratePricesList());
 
-        return redirect('/super');
+        return ;
     }
 
 

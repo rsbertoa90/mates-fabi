@@ -1,13 +1,11 @@
 <template>
     
     <div class="row mt-4">
-        <div class="col-12">
-            <router-link to="/admin/lista-de-precios" class="btn btn-outline-info">  
+        <div class="col-12 mb-3">
+            <button @click="refreshPricesList" class="btn btn-outline-info">  
                 Refrescar Lista de Precios
-            </router-link>
-            <router-link to="/super/failed-jobs" class="btn btn-outline-danger">  
-                Failed jobs
-            </router-link>
+            </button>
+            
         </div>
         <div class="col-12 row" v-if="configs">
             <div class="col-12">
@@ -76,6 +74,12 @@ export default {
         }
     },
     methods:{
+        refreshPricesList(){
+            this.$http.get('lista-de-precios')
+            .then(r=>{
+                swal('Procedimiento iniciado','Espera unos minutos para ver reflejados los cambios','success');
+            });
+        },
         updateconfig(field)
         {
             let data = {
