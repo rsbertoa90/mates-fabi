@@ -256,23 +256,12 @@ export default{
                 } else {data.shipping = 0;}
                 
                 var vm = this;
-                vm.loading=true;
-                $.ajax({
-                    method : 'post',
-                    data : data,
-                    url : '/cotizer/send',
-                    success(r){
-                        
-                        if(vm.user.role_id > 2){
-                            swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad','success')
+                vm.$store.commit('setLoading',true);
+                vm.$http.post('/cotizer/send',data)
+                    .then(response => {
+                        swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad','success')
                                 .then(confirm => {window.location.replace('/')});
-                        }
-                        else{
-                            swal('Orden guardada', 'Revisa el panel de administracion de ordenes','success')
-                                .then(confirm =>{window.location.replace('/admin/cotizador')});
-                        }
-                    } 
-                });
+                    });
         }
     }
     
