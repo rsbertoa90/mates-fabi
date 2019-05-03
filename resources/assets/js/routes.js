@@ -67,6 +67,8 @@ import Orders from './components/admin/Orders.vue';
 import SearchStatics from './components/admin/Search-statics.vue';
 import Metadata  from './components/super/metadata/Super.vue';
 
+/* landings */
+import Rosario from './components/landings/Rosario.vue';
 
 
 const router = new VueRouter({
@@ -147,7 +149,11 @@ const router = new VueRouter({
             name: 'busqueda',
             component: Busqueda
         },
-        
+        {
+            path:'/envios-a-rosario',
+            name:'Rosario',
+            component: Rosario
+        },
         {
             path: '/:category_slug',
             component: CategoryRouter,
