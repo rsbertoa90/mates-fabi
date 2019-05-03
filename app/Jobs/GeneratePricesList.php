@@ -22,9 +22,11 @@ class GeneratePricesList implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public $newPath;
+    public function __construct($newPath)
     {
         //
+        $this->newPath = $newPath;
     }
 
 
@@ -50,11 +52,15 @@ class GeneratePricesList implements ShouldQueue
      */
     public function handle()
     {
-        $path = public_path().'/mates-fabi.pdf';
+        $path = public_path().$this->newPath;
         
-        $categories = Category::whereHas('products', function ($q){
-            $q->orderBy('name')->where('paused',0);
-        })->orderBy('name')->get();
+        $categories =  Category::with('products.images')
+                    ->with(['products' => function($q){
+                        $q->where('paused',0);
+                    }])
+                    ->whereHas('products' , function($q){
+                $q->where('paused',0)->orderBy('name');
+            })->orderby('name')->get();
 
 
         $today = Carbon::now()->format('d/m/Y');

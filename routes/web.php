@@ -63,6 +63,8 @@ Route::middleware('CheckAdmin')->prefix('admin')->group(function(){
 Route::get('/pdf/{order}','OrderController@toPDF');
 
 Route::get('/config','ConfigController@get');
+
+Route::get('/descargar-lista-de-precios','PdfController@downloadPricesList');
 /* 
 Route::get('/', 'HomeController@index')->name('home'); */
 /* Route::get('/home', function(){return redirect('/');}); */

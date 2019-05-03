@@ -8,12 +8,25 @@ use PDF;
 use Carbon\Carbon;
 use App\Jobs\GeneratePricesList;
 use Queue;
+use Illuminate\Support\Facades\Cache;
 
 class PdfController extends Controller
 {
     public function prices()
     {
-        Queue::push(new GeneratePricesList());
+      
+        $date = str_slug(Carbon::now());
+        $newPath = '/precios-'.$date.'.pdf';
+        if(Cache::has('prices_url'))
+        {
+            if(file_exists(public_path().Cache::get('prices_url'))){
+                unlink(public_path().Cache::get('prices_url'));
+            }
+            Cache::forget('prices_url');
+        }
+        Cache::forever('prices_url',$newPath); 
+       
+        Queue::push(new GeneratePricesList($newPath));
 
         return ;
     }
@@ -31,5 +44,17 @@ class PdfController extends Controller
 
         // Echo out a sample image
        return $src;
+    }
+
+
+    public function downloadPricesList()
+    {
+        
+        if (Cache::has('prices_url'))
+        {
+   
+        
+            return redirect(Cache::get('prices_url'));
+        }
     }
 }
