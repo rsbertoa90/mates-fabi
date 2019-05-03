@@ -24,7 +24,11 @@
 
 <script>
 export default {
-    
+     metaInfo(){
+        return{
+            title: "Envios a Rosario - Mates Fabi",
+        }
+    },
 }
 </script>
 
