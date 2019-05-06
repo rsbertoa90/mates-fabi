@@ -25,7 +25,7 @@
                     </h4>
                    <!--  <p style="height:45px" class="card-text crop-text" itemprop="description"> {{product.description}}</p> -->
                     <router-link :to="getSlug(product)" class="btn btn-outline-second"> Ver mas</router-link>
-                    <shopButton :product="product"></shopButton>
+                    <shopButton class="mt-1" :product="product"></shopButton>
                 </div>
             </div>
         </swiper-slide>
@@ -117,6 +117,13 @@ import shopButton from '../category/product/shop-button.vue';
 
 <style scoped>
 
+.card-body{
+  text-align: center;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
 
   .badge{
     font-size: 1.2rem;
