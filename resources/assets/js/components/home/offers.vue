@@ -23,7 +23,7 @@
                       ${{product.price | price}} 
                       <strike style="font-size:1rem" v-if="product.offer && $store && !$store.getters.getConfig.hide_prices" class="text-secondary"> ${{product.price * 1.67 | price}}</strike> 
                     </h4>
-                    <p style="height:45px" class="card-text crop-text" itemprop="description"> {{product.description}}</p>
+                   <!--  <p style="height:45px" class="card-text crop-text" itemprop="description"> {{product.description}}</p> -->
                     <router-link :to="getSlug(product)" class="btn btn-outline-second"> Ver mas</router-link>
                     <shopButton :product="product"></shopButton>
                 </div>
