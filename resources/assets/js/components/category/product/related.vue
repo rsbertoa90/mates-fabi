@@ -26,6 +26,7 @@
                     </h4>
                    
                     <router-link :to="getSlug(product)" style="cursor:pointer" class="btn btn-outline-second  white-bold mb-4 mt-1"> Ver mas</router-link>
+                    <shop-button :product="product"></shop-button>
                     <p></p>
                 </div>
             </router-link>
@@ -39,8 +40,10 @@
 </template>
 
 <script>
+import shopButton from './shop-button.vue';
   export default {
     props:['category_id'],
+    components:{shopButton},
     data() {
       return {
         render:false,

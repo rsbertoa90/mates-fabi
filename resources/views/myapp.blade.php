@@ -49,8 +49,7 @@
     
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin>
-    
+   
     
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" >

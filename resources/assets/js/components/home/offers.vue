@@ -25,6 +25,7 @@
                     </h4>
                     <p style="height:45px" class="card-text crop-text" itemprop="description"> {{product.description}}</p>
                     <router-link :to="getSlug(product)" class="btn btn-outline-second"> Ver mas</router-link>
+                    <shopButton :product="product"></shopButton>
                 </div>
             </div>
         </swiper-slide>
@@ -37,7 +38,9 @@
 </template>
 
 <script>
+import shopButton from '../category/product/shop-button.vue';
   export default {
+    components:{shopButton},
     data() {
       return {
         render:false,
