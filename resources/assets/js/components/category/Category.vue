@@ -228,7 +228,7 @@ export default {
         return{
             display : 'grid',
             sortby : 'name',
-            order : 'desc',
+            order : 'asc',
             showOptions :[3,6,9,12],
             show:12,
             page:1,
