@@ -72,8 +72,8 @@ export default {
             this.$http.post('/login',this.formData)
                 .then(res => {
                     if (res.data){
-                        this.$store.dispatch('fetchUser');
-                         this.$router.push('/admin');
+                    // Simulate an HTTP redirect:
+                    window.location.replace("/admin");
                     }
                     
                 });

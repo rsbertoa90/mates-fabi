@@ -101,11 +101,11 @@ window.csrf = $('meta[name="csrf-token"]').attr('content');
 Vue.http.headers.common['X-CSRF-TOKEN'] = window.csrf;
 
  */
+/* 
+console.log('csrf',window.csrf);
 
 window.csrf = document.getElementById('csrf-token').getAttribute('content');
-/* console.log('csrf',window.csrf); */
-
-Vue.http.headers.common['X-CSRF-TOKEN'] = window.csrf;
+Vue.http.headers.common['X-CSRF-TOKEN'] = window.csrf; */
 
 
 
@@ -129,7 +129,13 @@ const app = new Vue({
         this.fetchConfig();
         this.fetchStates();
         this.fetchMeta();
-    },    
+    },  
+    mounted(){
+        window.csrf = document.getElementById('csrf-token').getAttribute('content');
+        Vue.http.headers.common['X-CSRF-TOKEN'] = window.csrf;
+     /*    console.log('csrf', window.csrf); */
+
+    }  
 });
 
 

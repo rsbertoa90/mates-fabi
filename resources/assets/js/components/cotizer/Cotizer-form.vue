@@ -251,6 +251,7 @@ export default{
                 let list = this.compactList();
                 data.list = JSON.stringify(list);
                 data.total = this.total;
+                data['_token'] = window.csrf;
                 if (data.shipping){
                     data.shipping = 1;
                 } else {data.shipping = 0;}
