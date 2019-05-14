@@ -12,3 +12,7 @@ Disallow: /logout
 Disallow: /cotizer/
 Allow: .js
 Allow: .css
+Allow: /*.js$
+Allow: /*.css$
+Allow: /js/*.js$
+Allow: /css/*.css$
