@@ -6,12 +6,7 @@ Disallow: /super/
 Disallow: /login
 Disallow: /register
 Disallow: /suscription
-
-
 Disallow: /config
 Disallow: /buscar
 Disallow: /logout
 Disallow: /cotizer/
-
-
-
