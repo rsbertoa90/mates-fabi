@@ -1,4 +1,4 @@
-require('./error-handler.js');
+/* require('./error-handler.js'); */
 
 require('intersection-observer');
 /**
