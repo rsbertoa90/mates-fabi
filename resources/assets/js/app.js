@@ -1,3 +1,5 @@
+require('./error-handler.js');
+
 require('intersection-observer');
 /**
  * First we will load all of this project's JavaScript dependencies which
