@@ -10,3 +10,5 @@ Disallow: /config
 Disallow: /buscar
 Disallow: /logout
 Disallow: /cotizer/
+Allow: .js
+Allow: .css
