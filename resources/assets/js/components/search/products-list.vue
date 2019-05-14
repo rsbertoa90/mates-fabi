@@ -40,7 +40,7 @@
 
 <script>
 import shopButton from '../category/product/shop-button.vue';
- import carousel from '../cotizer/Carousel.vue';
+ import carousel from '../cotizer/Img-modal.vue';
 export default {
     components:{carousel,shopButton},
     props:['products'],
@@ -64,9 +64,12 @@ export default {
                 this.carouselProduct = product;
                 this.showCarousel = true;
 
-                let element = this.$refs.modal.$el;
-              
-                $(element).modal('show');
+               setTimeout(() => {
+                        
+                        let element = this.$refs.modal.$el;
+                      
+                        $(element).modal('show');
+                    }, 100);
             }
     },
         computed : {
