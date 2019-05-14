@@ -19,4 +19,5 @@ mix.config.webpackConfig.output = {
 mix.js('resources/assets/js/app.js', 'public/js')
     .extract()
    .sass('resources/assets/sass/app.scss', 'public/css')
-   .version();
+   .version()
+   ;
