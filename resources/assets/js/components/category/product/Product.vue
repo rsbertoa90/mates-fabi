@@ -14,14 +14,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-6" itemprop="offer">
                 <div class="d-flex flex-column align-items-start justify-content-around h-100">
                     <div class="d-flex flex-column">
-                        <h2> {{product.name | ucFirst}} </h2>
+                        <h2 itemprop="name"> {{product.name | ucFirst}} </h2>
                         <span class="text-secondary"> {{product.category.name |ucFirst}} </span>
                     </div>
                     <div  class="d-flex align-items-center">
-                        <h2>  ${{product.price}} </h2>
+                        <h2 itemprop="price">  ${{product.price}} </h2>
                         <h5> <del class="text-secondary ml-2"> ${{product.price*1.4 |price}} </del> </h5>
                     </div>
                     <div class="d-flex flex-column mt-3" v-if="product.description">
