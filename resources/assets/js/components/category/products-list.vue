@@ -16,10 +16,10 @@
                         <span class="badge bg-focus white-bold "> Oferta! </span>
                     </div>
                 </div>
-                <div class="col-12 col-lg-8 d-flex flex-column justify-content-around align-items-between">
+                <div class="col-12 col-lg-8 d-flex flex-column justify-content-around align-items-between" itemprop="offer">
                         <div class="h-25 p-2 d-flex flex-column justify-content-between">
                             <h5 itemprop="name" clasS="font-weight-bold">{{product.name | ucFirst}}</h5>
-                            <h5 v-if="config && !config.hide_prices">${{product.price}}</h5>
+                            <h5 v-if="config && !config.hide_prices" itemprop="price">${{product.price}}</h5>
 
                         </div>
                         <div itemprop="description" class="h-50 d-flex align-items-end ml-2">

@@ -5,15 +5,15 @@
                 v-for="category in categories" 
                 :key="category.id" class="d-flex align-items-stretch">
                 
-                <div class="card" itemscope itemtype="https://schema.org/Product">
-                    <router-link :to="category.slug"  class="d-block w-100 overflow-hidden" itemprop="url">
+                <div class="card">
+                    <router-link :to="category.slug"  class="d-block w-100 overflow-hidden">
                         <div class="card-img-top overflow-hidden">
-                            <v-lazy-image itemprop="image" class=" onhover" :src="category.image" 
+                            <v-lazy-image class=" onhover" :src="category.image" 
                                                     :alt="category.name" />
                         </div>
                         <div class="card-body"> 
-                            <h5 class="card-title" itemprop="name"> {{category.name | ucFirst}} </h5>
-                            <p v-if="category.homedescription" class="texto card-text crop-text" itemprop="description"> {{category.homedescription}} </p>
+                            <h5 class="card-title" > {{category.name | ucFirst}} </h5>
+                            <p v-if="category.homedescription" class="texto card-text crop-text" > {{category.homedescription}} </p>
                         </div>
                     </router-link>
                 </div>

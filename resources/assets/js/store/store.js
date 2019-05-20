@@ -13,8 +13,12 @@ export const store = new Vuex.Store({
         categories: [],
         loading:true,
         searchTerm:'',
+        tutoseen:false,
     },
     getters :{
+        getTutoseen(store){
+            return store.tutoseen;
+        },
         getSearchTerm(store){
             return store.searchTerm;
         },
@@ -145,6 +149,9 @@ export const store = new Vuex.Store({
             
     },
     mutations : {
+        setTutoseen(state,payload){
+            state.tutoseen=payload;
+        },
         setSearchTerm(state,payload)
         {
             if(payload.length > 2)

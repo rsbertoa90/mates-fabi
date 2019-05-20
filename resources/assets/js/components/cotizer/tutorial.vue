@@ -46,6 +46,7 @@ export default {
     methods: {
         setShowed(){
             this.showed=true;
+            this.$store.commit('setTutoseen',true);
         },
     handleScroll () {
         if (!this.scrolled){

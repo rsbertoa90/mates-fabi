@@ -14,7 +14,9 @@
                         
                         <div class="col-12 overflow-hidden">
                             <transition enter-active-class="animated slideInLeft " appear>
-                                <router-view></router-view>
+                                <keep-alive include="carrito">
+                                    <router-view></router-view>
+                                </keep-alive>
                             </transition>
                         </div>
 

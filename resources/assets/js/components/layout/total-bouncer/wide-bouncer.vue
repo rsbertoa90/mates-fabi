@@ -23,8 +23,8 @@
                     </table>
                 </div>
                 <div  class="border-first">
-                    <div class="bg-white d-flex justify-content-center p-1" @click="scrollDown">
-                        <router-link to="/cotizador" class="finish bg-white w-100 text-center" >  Terminar pedido </router-link>
+                    <div class="bg-white d-flex justify-content-center p-1" >
+                        <router-link to="/carrito" class="finish bg-white w-100 text-center" >  Terminar pedido </router-link>
                     </div>
                 </div>
             </div>    

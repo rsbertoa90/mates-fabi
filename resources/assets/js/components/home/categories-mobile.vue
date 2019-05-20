@@ -5,13 +5,13 @@
               v-for="category in categories" 
               :key="category.id">
               
-            <div class="card" itemscope itemtype="https://schema.org/Product">
-                <router-link :to="category.slug"  class="d-block w-100" itemprop="url">
-                    <v-lazy-image itemprop="image" class="card-img-top onhover" :src="category.image" 
+            <div class="card" >
+                <router-link :to="category.slug"  class="d-block w-100" >
+                    <v-lazy-image class="card-img-top onhover" :src="category.image" 
                                             :alt="category.name" />
                     <div class="card-body">
-                        <h5 class="card-title" itemprop="name"> {{category.name | ucFirst}} </h5>
-                        <p v-if="category.homedescription" class="card-text crop-text texto" itemprop="description"> {{category.homedescription}} </p>
+                        <h5 class="card-title" > {{category.name | ucFirst}} </h5>
+                        <p v-if="category.homedescription" class="card-text crop-text texto"> {{category.homedescription}} </p>
                     </div>
                 </router-link>
             </div>

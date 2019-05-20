@@ -17,9 +17,9 @@
                     <div @click="show(product)" class="card-img-overlay" v-if="product.offer">
                         <span class="badge bg-focus white-bold "> Oferta! </span>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body p-0" itemprop="offer">
                         <h5 style="height:40px" class="card-title font-weight-bold" itemprop="name">{{product.name | ucFirst}}</h5>
-                        <h5 v-if="config && !config.hide_prices" class="card-subtitle">${{product.price}}</h5>
+                        <h5 v-if="config && !config.hide_prices" class="card-subtitle" itemprop="price">${{product.price}}</h5>
                       <!--   <p class="card-text"> {{product.description}} </p> -->
                         <router-link :to="getSlug(product)" class="btn btn-outline-focus mt-2" itemprop="url">Ver mas</router-link>
                         <shop-button :product="product"></shop-button>

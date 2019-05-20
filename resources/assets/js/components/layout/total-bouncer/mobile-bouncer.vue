@@ -1,8 +1,8 @@
 <template>
 <transition  enter-active-class="animated bounceIn">
 
-         <router-link to="/cotizador" v-if="total>0" key="bouncer" id="total"  >
-            <div  @click="scrollDown"> 
+         <router-link to="/carrito" v-if="total>0" key="bouncer" id="total"  >
+            <div> 
                 <div  class="bg-first p-1">
                     <div class=" bg-white d-flex justify-content-center p-1">
                          <span  class="fa fa-shopping-cart first mt-1 mr-2"></span>

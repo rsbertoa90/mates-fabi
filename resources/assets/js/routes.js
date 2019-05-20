@@ -61,7 +61,7 @@ import Login from './components/login/Login.vue';
 import CategoryRouter from './components/category/Category-router.vue';
 import Category from './components/category/Category.vue';
 import Product from './components/category/product/Product.vue';
-
+import ShoppingCart from './components/shoppingCart/ShoppingCart.vue';
 import Admin from './components/admin/Admin.vue';
 import Orders from './components/admin/Orders.vue';
 import SearchStatics from './components/admin/Search-statics.vue';
@@ -149,6 +149,12 @@ const router = new VueRouter({
             name: 'busqueda',
             component: Busqueda
         },
+        {
+            path: '/carrito',
+            name: 'carrito',
+            component: ShoppingCart
+        },
+
         {
             path:'/envios-a-rosario',
             name:'Rosario',

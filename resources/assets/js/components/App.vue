@@ -2,7 +2,7 @@
     <div class="app-container">
         <userLayout v-if="!user || user.role_id > 2"></userLayout>
         <admin-layout v-if="user && user.role_id < 3"></admin-layout>
-        <total-bouncer></total-bouncer>
+        <total-bouncer v-if="$route.path != '/carrito'"></total-bouncer>
         <div v-if="loading" class="loader">
             <fade-loader :loading="loading" size="200px"></fade-loader>
         </div>

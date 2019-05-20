@@ -87,9 +87,11 @@ class MailController extends Controller
 
     public static function mailOrderToClient($order)
     {
-        Mail::to($order->email)
-            ->bcc(["matesfabi@gmail.com","roominagii@gmail.com"])
-            ->send(new Cotizacion($order));
+        if(env('APP_ENV') == 'production'){
+            Mail::to($order->email)
+                ->bcc(["matesfabi@gmail.com","roominagii@gmail.com"])
+                ->send(new Cotizacion($order));
+        }
            
     }
 }

@@ -67,14 +67,10 @@
         
         
         <hr>
-        <div>
-            <cotizer-form ></cotizer-form>
-        </div>
-        <div v-if="list && list.length > 0">
-            <pedido ></pedido>
-        </div>
-       
-        <tutorial v-if="!user || user.role_id > 2"></tutorial>
+        
+       <div v-if="!tutoseen">
+            <tutorial v-if="!user || user.role_id > 2"></tutorial>
+       </div>
     </div>
 </template>
 
@@ -84,12 +80,12 @@ import metadataMixin from '../metadataMixin.js';
  import { mapActions } from 'vuex';
  import { mapGetters } from 'vuex';
    
-    import pedido from './pedido.vue';
+   
     import tutorial from './tutorial.vue'
-    import cotizerForm from './Cotizer-form.vue'
+   
     export default {
         mixins:[metadataMixin],
-        components : {pedido,tutorial,cotizerForm,productRow},
+        components : {tutorial,productRow},
         data(){
             return {
                 selectedCategory:null,              
@@ -104,7 +100,8 @@ import metadataMixin from '../metadataMixin.js';
                user : 'getUser',
                configs: 'getConfig',
                 total:'getTotal',
-                list:'getList'
+                list:'getList',
+                tutoseen:'getTutoseen'
             }),
             
           
