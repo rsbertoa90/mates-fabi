@@ -24,6 +24,9 @@
                     <li class="nav-item ">
                         <router-link class="nav-link text-white" to="/admin/metadata">Metadatas</router-link>
                     </li>
+                    <li class="nav-item " v-if="issuper">
+                        <router-link class="nav-link text-white" to="/stats">Estadisticas de compras</router-link>
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-link text-white" href="/logout">Salir</a>
                     </li>
@@ -37,6 +40,9 @@ export default {
     computed:{
         user(){
             return this.$store.getters.getUser;
+        },
+        issuper(){
+            return (this.user && (this.user.name=='Gisella'|| this.user.name=="Rodrigo"));
         }
     }
 }
