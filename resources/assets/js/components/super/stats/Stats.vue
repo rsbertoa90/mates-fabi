@@ -27,7 +27,7 @@
             <tbody>
                 <tr v-for="(d, key) in sortedData" :key="key">
                     <td>
-                        {{d.date }}
+                        {{d.date |date }}
                     </td>
                     <td>{{d.times}}</td>
                     <td>${{d.total | price}}</td>
@@ -92,7 +92,9 @@ export default {
             return res;
         },
         orders(){
-            return this.$store.getters.getOrders;
+            return this.$store.getters.getOrders.filter(o => {
+                return (o.status != 'cancelado');
+            });
         },
         sortedData(){
             if(this.tabledata){
@@ -101,39 +103,39 @@ export default {
                 const array = this.tabledata;
                 const sortedArray  = array.sort((a,b) => new Moment(a.rawdate).format('YYYYMMDD') - new Moment(b.rawdate).format('YYYYMMDD'))
                 
-                console.log(sortedArray);
+               /*  console.log(sortedArray); */
                 return sortedArray.reverse();
             }
         },
         tabledata(){
             if (this.orders)
             {
-                let startDate= moment(this.startDate).format('DD/MM/YYYY');
-                let endDate =moment(this.endDate).format('DD/MM/YYYY');
-                console.log('startdate',startDate);
+                let startDate= moment(this.startDate)
+                let endDate =moment(this.endDate);
+               /*  console.log('startdate',startDate);
                 console.log('endtdate',endDate);
-                
+                 */
                 let res = [];
                 this.orders.forEach(order => {
                 
-                    console.log('crudo',order.created_at);
-                    let date = moment(order.created_at).format('DD/MM/YYYY');
-                    console.log('procesado',date);
-                    if ( moment(order.created_at).isBetween(moment(this.startDate),moment(this.endDate)) )
+                 /*    console.log('crudo',order.created_at); */
+                    let date = moment(order.created_at);
+                   /*  console.log('procesado',date); */
+                    if ( moment(order.created_at).isBetween(this.startDate, this.endDate) )
                     {
-                        console.log('date in range');
+                    /*     console.log('date in range'); */
                         let isNew = true;
                         res.forEach(o => {
-                            if (date == o.date)
+                            if (date.format('YYYYMMDD') == o.date.format('YYYYMMDD'))
                             {
-                                console.log('not new');
+                         /*        console.log('not new'); */
                                 isNew =false;
                                 o.times++;
                                 o.total=o.total+order.total;
                             }
                         });
                         if (isNew){
-                            console.log('new');
+                          /*   console.log('new'); */
                             res.push({
                                 date:date,
                                 times:1,
