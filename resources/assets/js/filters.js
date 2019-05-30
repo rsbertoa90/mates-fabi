@@ -2,9 +2,19 @@ import Vue from 'vue';
 import moment from 'moment';
 window.moment = moment;
 
+
+function numberWithCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    
+    return parts.join(",");
+
+}
+
+
 Vue.filter('price', value => {
     if (value % 1 != 0) {
-        return value.toFixed(2);
+        return numberWithCommas(value.toFixed(2).toLocaleString());
     }
     return value;
 });
