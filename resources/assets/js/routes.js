@@ -27,6 +27,21 @@ function guardAdmin(to, from, next) {
     }, 300);
 }
 
+function guardSuper(to, from, next) {
+    setTimeout(() => {
+
+        let user = store.getters.getUser;
+        if (user && (user.email=='rsbertoa90@gmail.com' || user.email=='roominagii@gmail.com')) {
+            next();
+        } else {
+            next('/admin');
+        }
+
+    }, 300);
+}
+
+
+
 function guardLogin(to, from, next) {
     setTimeout(() => {
 
@@ -62,10 +77,13 @@ import CategoryRouter from './components/category/Category-router.vue';
 import Category from './components/category/Category.vue';
 import Product from './components/category/product/Product.vue';
 import ShoppingCart from './components/shoppingCart/ShoppingCart.vue';
+
 import Admin from './components/admin/Admin.vue';
 import Orders from './components/admin/Orders.vue';
 import SearchStatics from './components/admin/Search-statics.vue';
 import Metadata  from './components/super/metadata/Super.vue';
+
+import Stats from './components/super/stats/Stats.vue'; 
 
 /* landings */
 import Rosario from './components/landings/Rosario.vue';
@@ -91,6 +109,11 @@ const router = new VueRouter({
              name: 'admin',
              component: Admin,
              beforeEnter: guardAdmin
+         }, {
+             path: '/stats',
+             name: 'stats',
+             component: Stats,
+             beforeEnter: guardSuper
          }, {
              path: '/admin/busquedas',
              name: 'searchStatics',

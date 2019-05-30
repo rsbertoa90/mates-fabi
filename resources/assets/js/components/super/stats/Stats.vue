@@ -1,0 +1,149 @@
+<template>
+    <div class="containing">
+        <div class="date-selectors w-100 d-flex">
+            <div class="d-flex flex-column">
+                <label>Fecha desde</label>
+                <v-datepicker v-model="startDate" :lang="es"></v-datepicker>
+            </div>
+            <div class="d-flex flex-column">
+                <label>Fecha hasta</label>
+                <v-datepicker v-model="endDate" :lang="es"></v-datepicker>
+            </div>
+            <div class="d-flex align-items-end font-weight-bold" >
+                <div v-if="totalorders" class="ml-4">
+                   Pedidos: {{totalorders}}
+                </div>
+                <div v-if="totalmoney" clasS="ml-4">
+                   Total: ${{totalmoney | price}}
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <th> Fecha </th>
+                <th> Pedidos</th>
+                <th>Total de la fecha</th>
+            </thead>
+            <tbody>
+                <tr v-for="(d, key) in tabledata" :key="key">
+                    <td>
+                        {{d.date }}
+                    </td>
+                    <td>{{d.times}}</td>
+                    <td>${{d.total | price}}</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</template>
+
+
+<script>
+
+import Datepicker from 'vuejs-datepicker';
+import { es } from 'vuejs-datepicker/dist/locale'
+import datamixin from '../../datamixin.js';
+export default {
+    mixins:['datamixin'],
+     components:{
+        'v-datepicker':Datepicker
+    },
+    data(){
+        return{
+            es:es,
+            history:null,
+            startDate:new Date(2019,1,1),
+            endDate: new Date(),
+            
+
+        }
+    },
+    watch:{
+        super()
+        {
+            if (!this.super){
+                window.location.replace('/');
+            }
+        }
+    },
+    mounted(){
+        if(!this.$store.orders || this.$store.orders.length < 1){
+            this.$store.dispatch('fetchOrders');
+        }
+    },
+    computed:{
+        totalorders(){
+            let res = 0;
+            if (this.tabledata){
+                this.tabledata.forEach(item => {
+                    res += item.times;
+                });
+            }
+            return res;
+        },
+        totalmoney(){
+            let res = 0;
+            if (this.tabledata){
+                this.tabledata.forEach(item => {
+                    res += item.total;
+                });
+            }
+            return res;
+        },
+        orders(){
+            return this.$store.getters.getOrders;
+        },
+        tabledata(){
+            if (this.orders)
+            {
+                let startDate= moment(this.startDate).format('DD/MM/YYYY');
+                let endDate =moment(this.endDate).format('DD/MM/YYYY');
+                console.log('startdate',startDate);
+                console.log('endtdate',endDate);
+                
+                let res = [];
+                this.orders.forEach(order => {
+                
+                    console.log('crudo',order.created_at);
+                    let date = moment(order.created_at).format('DD/MM/YYYY');
+                    console.log('procesado',date);
+                    if ( moment(order.created_at).isBetween(moment(this.startDate),moment(this.endDate)) )
+                    {
+                        console.log('date in range');
+                        let isNew = true;
+                        res.forEach(o => {
+                            if (date == o.date)
+                            {
+                                console.log('not new');
+                                isNew =false;
+                                o.times++;
+                                o.total=o.total+order.total;
+                            }
+                        });
+                        if (isNew){
+                            console.log('new');
+                            res.push({
+                                date:date,
+                                times:1,
+                                total:order.total
+                            });
+                        }
+                    }
+                });
+                return _.orderBy(res,'date','desc');
+            }
+        }
+    },
+
+    
+}
+</script>
+
+<style lang="scss" scoped>
+.containing{
+    min-height: 100vh;
+    
+}
+</style>
+

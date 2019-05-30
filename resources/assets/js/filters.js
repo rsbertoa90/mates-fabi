@@ -18,6 +18,9 @@ Vue.filter('text', value => {
  Vue.filter('datetime', val => {
     return moment(val).format('DD/MM/YYYY H:mm');
  });
+ Vue.filter('date', val => {
+    return moment(val).format('DD/MM/YYYY');
+ });
 
 Vue.filter('slug', str => {
 
