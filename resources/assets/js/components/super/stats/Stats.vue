@@ -25,7 +25,7 @@
                 <th>Total de la fecha</th>
             </thead>
             <tbody>
-                <tr v-for="(d, key) in tabledata" :key="key">
+                <tr v-for="(d, key) in sortedData" :key="key">
                     <td>
                         {{d.date }}
                     </td>
@@ -53,7 +53,7 @@ export default {
         return{
             es:es,
             history:null,
-            startDate:new Date(2019,1,1),
+            startDate:new Date(2018,1,1),
             endDate: new Date(),
             
 
@@ -94,6 +94,17 @@ export default {
         orders(){
             return this.$store.getters.getOrders;
         },
+        sortedData(){
+            if(this.tabledata){
+            
+                const Moment = require('moment')
+                const array = this.tabledata;
+                const sortedArray  = array.sort((a,b) => new Moment(a.rawdate).format('YYYYMMDD') - new Moment(b.rawdate).format('YYYYMMDD'))
+                
+                console.log(sortedArray);
+                return sortedArray.reverse();
+            }
+        },
         tabledata(){
             if (this.orders)
             {
@@ -126,7 +137,8 @@ export default {
                             res.push({
                                 date:date,
                                 times:1,
-                                total:order.total
+                                total:order.total,
+                                rawdate:order.created_at
                             });
                         }
                     }
