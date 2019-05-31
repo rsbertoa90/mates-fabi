@@ -157,11 +157,7 @@ export default{
         },
         minBuy(){
             if(this.configs){
-                if (this.formData.shipping){
                     return this.configs.minbuy_ship;
-                }else{
-                    return this.configs.minbuy;
-                } 
             }
         },
         user(){
