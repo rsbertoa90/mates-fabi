@@ -8,7 +8,7 @@
         <div class="row mt-2 d-flex flex-column mb-4 mt-4" v-if="configs">
            
                 <span><i class="fa fa-check fucsia"></i>  Los precios publicados son sin IVA</span>
-                <span><i class="fa fa-check fucsia"></i> Acercándote personalmente a las sucursales la compra mínima es de {{configs.minbuy}}.</span>
+                <span><i class="fa fa-check fucsia"></i> Acercándote personalmente a las sucursales la compra mínima es de ${{configs.minbuy}}.</span>
                 <span><i class="fa fa-check fucsia"></i> La Compra minima <b> ONLINE </b> es de ${{configs.minbuy_ship}}</span>
                 <span><i class="fa fa-check fucsia"></i> Los despachos o retiros de las compras online se realizan de 2 a 6 días hábiles luego del informe y acreditación de pago.</span>
                 <span><i class="fa fa-check fucsia"></i> <b> Envío: </b> la elección del trasporte y el costo del mismo corre a cargo del comprador. Mates Fabi lo lleva sin cargo  desde la fabrica hasta el transporte de tu elección.</span>

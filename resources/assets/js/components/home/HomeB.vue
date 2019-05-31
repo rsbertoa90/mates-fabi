@@ -10,13 +10,13 @@
                <span class="fa fa-check fucsia"></span>
                Podes visitar nuestras sucursales ubicadas en Once de lunes a viernes de 9 a 18 hs o hacer tu pedido Online.
           </p>
-          <p>
+          <p v-if="configs">
                <span class="fa fa-check fucsia"></span>
-                La compra mínima acercándote personalmente a cualquiera de nuestras sucursales es de $2500.
+                La compra mínima acercándote personalmente a cualquiera de nuestras sucursales es de ${{configs.minbuy}}}.
           </p>
-          <p>
+          <p v-if="configs">
                <span class="fa fa-check fucsia"></span>
-                check La compra mínima Online es de $5000.
+                La compra mínima Online es de ${{configs.minbuy_ship}}.
           </p>
           <p>
                <span class="fa fa-check fucsia"></span>
@@ -24,7 +24,7 @@
           </p>
           <p>
                <span class="fa fa-check fucsia"></span>
-              Los despachos se realizan de 2 a 6 días hábiles a partir del      informe y acreditación de pago.
+              Los despachos se realizan de 2 a 6 días hábiles a partir del informe y acreditación de pago.
           </p>
               
         </div>

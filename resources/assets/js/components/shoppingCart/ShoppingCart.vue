@@ -6,6 +6,9 @@
         <div v-if="list && list.length > 0">
             <pedido ></pedido>
         </div>
+        <div v-if="total" class="mt-3">
+            <span class="total fucsia">TOTAL: ${{total |price}}</span>
+        </div>
     </div>
 </template>
 
@@ -24,6 +27,9 @@ export default {
     computed:{
         list(){
             return this.$store.getters.getList;
+        },
+        total(){
+            return this.$store.getters.getTotal;
         }
     }
 }
@@ -31,5 +37,7 @@ export default {
 
 
 <style lang="scss" scoped>
-    
+    .total{
+        font-size:35px;
+    }
 </style>
