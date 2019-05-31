@@ -1,8 +1,13 @@
 <template>
     <div class="" v-if="user">
 
-        <h5>Envianos tu pedido</h5>
-        <p>Recibiras confirmacion de tu presupuesto por email</p>
+        <h3>Ya terminé mi pedido</h3>
+       <div class="row mt-2 d-flex flex-column mb-4 mt-4">
+           
+                <span><i class="fa fa-check fucsia"></i> Debajo del formulario tenes el detalle de pedido por si querés re chequear o hacer algún cambio.</span>
+                <span><i class="fa fa-check fucsia"></i> Una vez completes y envíes el formulario te va a llegar una copia del pedido al mail..</span>
+           
+        </div>
         <form id="form" class="col-12">
         <!-- Retiro en local -->
               <div class="col-12 row form-group-row mb-3">
@@ -24,14 +29,15 @@
                   </div>
                </div> 
        <!--  -->        
+        <div class="warnings mb-4 mt-4 d-flex flex-column">
 
-       <span v-if="!formData.shipping" class="warn">*Los retiros  presenciales son el local de Pasteur 428(Once) a los 3-5 dias habiles de haber echo el pedido </span>
-       <span v-if="formData.shipping" class="warn">*El despacho de la mercaderia se realiza de 3 a 5 dias habiles luego del pago. </span>
-       <span class="warn">*Los precios no incluyen IVA</span>
-        <div v-if="user.role_id > 2" class="col-12 row form-group-row mb-3">
-                    <span class=" warn" v-if="!formData.shipping">*El minimo de compra retirando en el local es de ${{minBuy}}</span>
-                    <span class=" warn" v-if="formData.shipping">*El minimo de compra para envios es de ${{minBuy}} </span>
-        </div> 
+            <span v-if="!formData.shipping" class="warn">*IMPORTANTE: Coordinar con la asesora de ventas antes de ir a buscar el pedido . La demora habitual en que el pedido este listo es de 2 a 6 dias hábiles luego de el informe y acreditación de pago </span>
+            
+                
+                <span class=" warn" v-if="formData.shipping">*El despacho de la mercaderia se realiza de 2 a 6 días hábiles luego del  informe y acreditacion de pago.  </span>
+            
+            <span class="warn">*Los precios no incluyen IVA</span>
+        </div>
 
              
              
@@ -211,7 +217,7 @@ export default{
 
                     swal({
                        title: "Importante!",
-                       text: "La eleccion del transporte y el costo de envío corren por cuenta del cliente. Mates fabi no se hace responsable de eventuales daños que pueda ocasionar la empresa de transporte.",
+                       text: "La eleccion del transporte y el costo de envío corren por cuenta del cliente. Mates fabi no se hace responsable de eventuales daños que pueda ocasionar la empresa de transporte. No despachamos en Oca, Andreani o Correo Argentino por malas experiencias con esos servicios",
                        icon: "warning",
                        buttons: [
                            'Cancelar',
@@ -260,8 +266,14 @@ export default{
                 vm.$store.commit('setLoading',true);
                 vm.$http.post('/cotizer/send',data)
                     .then(response => {
-                        swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad','success')
-                                .then(confirm => {window.location.replace('/')});
+                        if(data.shipping){
+                            swal('Gracias por tu compra', 'Te estaremos contactando a la brevedad','success')
+                                    .then(confirm => {window.location.replace('/')});
+                        }
+                        else{
+                            swal('Gracias por tu compra', 'Aguarda a ser contactado o comunicate al 11 3008 5414 para coordinar el retiro. (La preparación de pedido es de 2 a 6 días hábiles a partir de el informe y acreditación de pago) ','success')
+                                    .then(confirm => {window.location.replace('/')});
+                        }
                     });
         }
     }

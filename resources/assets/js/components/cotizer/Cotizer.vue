@@ -1,19 +1,19 @@
 <template>
     <div class="container">   
         <div class="row">
-            <h1 class="col-12 col-lg-6 text-center" v-if="user && user.role_id > 2">Hace tu pedido</h1>
+            <h1 class="col-12 col-lg-6 text-center" v-if="user && user.role_id > 2">Hace tu pedido Online</h1>
             <h1 class="col-12 col-lg-6 text-center" v-else>Tomar pedido</h1>
             <a href="/descargar-lista-de-precios" target="_blank" class="col-12 col-lg-6 btn btn-lg btn-outline-info"> <span class="fa fa-download"></span> Descargar lista de precios</a>
         </div>
-        <div class="row mt-2">
-            <div class="col-12 d-flex justify-content-center align-items-center">
-                <span class="fa fa-truck text-focus icono"></span> 
-                <p> La compra es entregada sin cargo al transporte de carga elegido por el cliente. Los despachos se realizan de 1 a 5 días hábiles a partir del informe y acreditación del pago.</p>
-            </div>
-            <div v-if="configs" class="col-12 d-flex justify-content-center align-items-center">
-                 <span class="fas fa-hand-holding-usd text-focus icono"></span> 
-                    <p>Compra mínima por local ${{configs.minbuy}}, para envíos ${{configs.minbuy_ship}}. (Los precios publicados son sin IVA) Formas de pago: Efectivo o Deposito/Transferencia Bancaria</p>
-            </div>
+        <div class="row mt-2 d-flex flex-column mb-4 mt-4" v-if="configs">
+           
+                <span><i class="fa fa-check fucsia"></i>  Los precios publicados son sin IVA</span>
+                <span><i class="fa fa-check fucsia"></i> Acercándote personalmente a las sucursales la compra mínima es de {{configs.minbuy}}.</span>
+                <span><i class="fa fa-check fucsia"></i> La Compra minima <b> ONLINE </b> es de ${{configs.minbuy_ship}}</span>
+                <span><i class="fa fa-check fucsia"></i> Los despachos o retiros de las compras online se realizan de 2 a 6 días hábiles luego del informe y acreditación de pago.</span>
+                <span><i class="fa fa-check fucsia"></i> <b> Envío: </b> la elección del trasporte y el costo del mismo corre a cargo del comprador. Mates Fabi lo lleva sin cargo  desde la fabrica hasta el transporte de tu elección.</span>
+                <span><i class="fa fa-check fucsia"></i> <b> Formas de pago: </b> Efectivo o Deposito /Transferencia Bancaria.</span>
+           
         </div>
 
         

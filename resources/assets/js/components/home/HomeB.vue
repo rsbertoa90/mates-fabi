@@ -1,17 +1,32 @@
 <template>
     <div class="container">
-        <div class="row p-5" v-if="configs">
+        <div class="row p-5 d-flex flex-column info" v-if="configs">
             <h1>Mayorista Mates Fabi</h1>
-            <p>
-                En Mayorista Mates Fabi tenemos precios y diseños únicos. Somos fabricante. Podes visitar nuestras sucursales ubicadas en Once de lunes a viernes de 9 a 18 hs o hacer tu pedido Online. Hacemos envíos a todo el país
-                Compra mínima por local ${{configs.minbuy}}, para envíos ${{configs.minbuy_ship}}.
-            </p> 
-            <p>  
-                La compra es entregada sin cargo al transporte de carga elegido por el cliente.
-            </p>
-            <p>
-                 Los despachos se realizaran de 1 a 5 días hábiles a partir del informe y acreditación del pago.
-            </p>
+            
+          <p>
+                <span class="fa fa-check fucsia"></span> En Mayorista Mates Fabi tenemos precios y diseños únicos porque somos fabricantes
+          </p>
+          <p>
+               <span class="fa fa-check fucsia"></span>
+               Podes visitar nuestras sucursales ubicadas en Once de lunes a viernes de 9 a 18 hs o hacer tu pedido Online.
+          </p>
+          <p>
+               <span class="fa fa-check fucsia"></span>
+                La compra mínima acercándote personalmente a cualquiera de nuestras sucursales es de $2500.
+          </p>
+          <p>
+               <span class="fa fa-check fucsia"></span>
+                check La compra mínima Online es de $5000.
+          </p>
+          <p>
+               <span class="fa fa-check fucsia"></span>
+                La compra es entregada sin cargo al transporte de carga elegido por el cliente. ( La elección del transporte y costo del mismo es a cargo del comprador)
+          </p>
+          <p>
+               <span class="fa fa-check fucsia"></span>
+              Los despachos se realizan de 2 a 6 días hábiles a partir del      informe y acreditación de pago.
+          </p>
+              
         </div>
 
         <div mt-4>
@@ -61,6 +76,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.info{
+    p{
+        font-size:16px;
+    }
+}
     .fa-whatsapp{
         color:#25d366;
         font-size: 2rem;
