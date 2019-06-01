@@ -1,5 +1,5 @@
 <template>
-    <div class="containing p-4">
+    <div class="containing p-4 ">
         <div class="date-selectors w-100 d-flex">
             <div class="d-flex flex-column">
                 <label>Fecha desde</label>
@@ -18,39 +18,51 @@
                 </div>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <th> Fecha </th>
-                <th> Pedidos</th>
-                <th>Total de la fecha</th>
-            </thead>
-            <tbody>
-                <tr v-for="(d, key) in sortedData" :key="key">
-                    <td>
-                        {{d.date |date }}
-                    </td>
-                    <td>{{d.times}}</td>
-                    <td>${{d.total | price}}</td>
-                </tr>
-                
-            </tbody>
-        </table>
+        <div class="row w-100">
+            <div class="col-6">
+
+                <table class="table table-striped">
+                    <thead>
+                        <th> Fecha </th>
+                        <th> Pedidos</th>
+                        <th>Total de la fecha</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(d, key) in sortedData" :key="key" style="cursor:pointer" @click="selected=d">
+                            <td>
+                                {{d.date |date }}
+                            </td>
+                            <td>{{d.times}}</td>
+                            <td>${{d.total | price}}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6">
+                <div v-if="selected">
+                    <detail :orders="selected.detail"></detail>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 
 <script>
-
+import detail from './detail';
 import Datepicker from 'vuejs-datepicker';
 import { es } from 'vuejs-datepicker/dist/locale'
 import datamixin from '../../datamixin.js';
 export default {
     mixins:['datamixin'],
      components:{
-        'v-datepicker':Datepicker
+        'v-datepicker':Datepicker,
+        'detail':detail,
     },
     data(){
         return{
+            selected:null,
             es:es,
             history:null,
             startDate:new Date(new Date().getFullYear(), new Date().getMonth(), 1),
@@ -132,6 +144,7 @@ export default {
                                 isNew =false;
                                 o.times++;
                                 o.total=o.total+order.total;
+                                o.detail.push(order);
                             }
                         });
                         if (isNew){
@@ -140,6 +153,7 @@ export default {
                                 date:date,
                                 times:1,
                                 total:order.total,
+                                detail:[order],
                                 rawdate:order.created_at
                             });
                         }
@@ -158,6 +172,9 @@ export default {
 .containing{
     min-height: 100vh;
     
+    width:100vw;
 }
+
+
 </style>
 
