@@ -40,7 +40,7 @@
 
         <div>
             <p class="text-center">
-               <span class="fa fa-whatsapp"></span> Atencion Personalizada llamando o por whatsapp al <b> 11-4951-5417 </b>
+               <span class="fa fa-whatsapp"></span> Atencion Personalizada llamando o por whatsapp al <b> 11-3008-5414 </b>
             </p>
         </div>
 
